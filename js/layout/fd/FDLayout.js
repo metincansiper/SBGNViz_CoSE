@@ -1,4 +1,3 @@
-//to be revised
 function FDLayout() {
   Layout.call(this);
 
@@ -11,7 +10,6 @@ function FDLayout() {
   this.gravityRangeFactor = FDLayoutConstants.DEFAULT_GRAVITY_RANGE_FACTOR;
   this.compoundGravityRangeFactor = FDLayoutConstants.DEFAULT_COMPOUND_GRAVITY_RANGE_FACTOR;
   this.displacementThresholdPerNode = (3.0 * FDLayoutConstants.DEFAULT_EDGE_LENGTH) / 100;
-//    this.useFRGridVariant = FDLayoutConstants.DEFAULT_USE_SMART_REPULSION_RANGE_CALCULATION;
   this.coolingFactor = 1.0;
   this.initialCoolingFactor = 1.0;
   this.totalDisplacement = 0.0;
@@ -45,21 +43,6 @@ function FDLayout() {
    * Grid is re-calculated after every tenth iteration.
    */
   this.grid = null;
-  /*this.addNodeToGrid = FDLayout.prototype.addNodeToGrid;
-   this.animate = FDLayout.prototype.animate;
-   this.calcGravitationalForce = FDLayout.prototype.calcGravitationalForce;
-   this.calcGravitationalForces = FDLayout.prototype.calcGravitationalForces;
-   this.calcGrid = FDLayout.prototype.calcGrid;
-   this.calcIdealEdgeLengths = FDLayout.prototype.calcIdealEdgeLengths;
-   this.calcRepulsionForce = FDLayout.prototype.calcRepulsionForce;
-   this.calcRepulsionForces = FDLayout.prototype.calcRepulsionForces;
-   this.calcRepulsionRange = FDLayout.prototype.calcRepulsionRange;
-   this.calcSpringForce = FDLayout.prototype.calcSpringForce;
-   this.calcSpringForces = FDLayout.prototype.calcSpringForces;
-   this.calculateRepulsionForceOfANode = FDLayout.prototype.calculateRepulsionForceOfANode;
-   this.initParameters = FDLayout.prototype.initParameters;
-   this.initSpringEmbedder = FDLayout.prototype.initSpringEmbedder;
-   this.isConverged = FDLayout.prototype.isConverged;*/
 }
 
 FDLayout.prototype = Object.create(Layout.prototype);
@@ -170,37 +153,6 @@ FDLayout.prototype.calcRepulsionForces = function () {
   var lNodes = this.getAllNodes();
   var processedNodeSet;
 
-//    if (this.useFRGridVariant)
-//    {
-//        // grid is a vector matrix that holds CoSENodes.
-//        // be sure to convert the Object type to CoSENode.
-//
-//        if (this.totalIterations % FDLayoutConstants.GRID_CALCULATION_CHECK_PERIOD == 1)
-//        {
-//            this.grid = this.calcGrid(this.graphManager.getRoot());
-//
-//            // put all nodes to proper grid cells
-//            for (i = 0; i < lNodes.length; i++)
-//            {
-//                nodeA = lNodes[i];
-//                this.addNodeToGrid(nodeA, this.grid,
-//                        this.graphManager.getRoot().getLeft(),
-//                        this.graphManager.getRoot().getTop());
-//            }
-//        }
-//
-//        processedNodeSet = [];
-//
-//        // calculate repulsion forces between each nodes and its surrounding
-//        for (i = 0; i < lNodes.length; i++)
-//        {
-//            nodeA = lNodes[i];
-//            this.calculateRepulsionForceOfANode(this.grid, nodeA, processedNodeSet);
-//            processedNodeSet.push(nodeA);
-//        }
-//    }
-//    else
-//    {
   for (i = 0; i < lNodes.length; i++)
   {
     nodeA = lNodes[i];
@@ -228,7 +180,6 @@ FDLayout.prototype.calcGravitationalForces = function () {
   for (var i = 0; i < lNodes.length; i++)
   {
     node = lNodes[i];
-
     this.calcGravitationalForce(node);
   }
 };
@@ -253,7 +204,6 @@ FDLayout.prototype.calcSpringForce = function (edge, idealLength) {
   var springForceY;
 
   // Update edge length
-
   if (this.uniformLeafNodeSizes &&
           sourceNode.getChild() == null && targetNode.getChild() == null)
   {
@@ -273,12 +223,6 @@ FDLayout.prototype.calcSpringForce = function (edge, idealLength) {
 
   // Calculate spring forces
   springForce = this.springConstant * (length - idealLength);
-
-//			// does not seem to be needed
-//			if (Math.abs(springForce) > CoSEConstants.MAX_SPRING_FORCE)
-//			{
-//				springForce = IMath.sign(springForce) * CoSEConstants.MAX_SPRING_FORCE;
-//			}
 
   // Project force onto x and y axes
   springForceX = springForce * (edge.getLengthX() / length);
@@ -315,15 +259,6 @@ FDLayout.prototype.calcRepulsionForce = function (nodeA, nodeB) {
 
             repulsionForceX = overlapAmount[0];
             repulsionForceY = overlapAmount[1];
-
-            /*assert ! (new RectangleD((rectA.x - repulsionForceX),
-             (rectA.y - repulsionForceY),
-             rectA.width,
-             rectA.height)).intersects(
-             new RectangleD((rectB.x + repulsionForceX),
-             (rectB.y + repulsionForceY),
-             rectB.width,
-             rectB.height));*/
           }
   else
           // no overlap
@@ -347,7 +282,6 @@ FDLayout.prototype.calcRepulsionForce = function (nodeA, nodeB) {
                     }
 
             // No repulsion range. FR grid variant should take care of this.
-
             if (Math.abs(distanceX) < FDLayoutConstants.MIN_REPULSION_DIST)
             {
               distanceX = IMath.sign(distanceX) *
@@ -365,12 +299,6 @@ FDLayout.prototype.calcRepulsionForce = function (nodeA, nodeB) {
 
             repulsionForce = this.repulsionConstant / distanceSquared;
 
-//			// does not seem to be needed
-//			if (Math.abs(repulsionForce) > CoSEConstants.MAX_REPULSION_FORCE)
-//			{
-//				repulsionForce = IMath.sign(repulsionForce) * CoSEConstants.MAX_REPULSION_FORCE;
-//			}
-
             // Project force onto x and y axes
             repulsionForceX = repulsionForce * distanceX / distance;
             repulsionForceY = repulsionForce * distanceY / distance;
@@ -384,8 +312,6 @@ FDLayout.prototype.calcRepulsionForce = function (nodeA, nodeB) {
 };
 
 FDLayout.prototype.calcGravitationalForce = function (node) {
-  //assert node.gravitationForceX == 0 && node.gravitationForceY == 0;
-
   var ownerGraph;
   var ownerCenterX;
   var ownerCenterY;
@@ -412,11 +338,8 @@ FDLayout.prototype.calcGravitationalForce = function (node) {
           // in the root graph
           {
             Math.floor(80);
-//            var res = ownerGraph.getEstimatedSize() *
-//                    this.gravityRangeFactor;
             estimatedSize = Math.floor(ownerGraph.getEstimatedSize() *
                     this.gravityRangeFactor);
-//            estimatedSize = res;
 
             if (absDistanceX > estimatedSize || absDistanceY > estimatedSize)
             {
@@ -463,7 +386,6 @@ FDLayout.prototype.animate = function () {
     if (this.notAnimatedIterations == this.animationPeriod)
     {
       this.update();
-
       this.notAnimatedIterations = 0;
     }
     else
