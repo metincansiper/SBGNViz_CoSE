@@ -25,18 +25,6 @@ function CoarseningNode(gm, vNode) {
    * weight
    */
   this.weight = 1; // 1 comes from the constructor in java
-
-  /*this.getMatching = CoarseningNode.prototype.getMatching;
-   this.getNode1 = CoarseningNode.prototype.getNode1;
-   this.getNode2 = CoarseningNode.prototype.getNode2;
-   this.getReference = CoarseningNode.prototype.getReference;
-   this.getWeight = CoarseningNode.prototype.getWeight;
-   this.isMatched = CoarseningNode.prototype.isMatched;
-   this.setMatched = CoarseningNode.prototype.setMatched;
-   this.setNode1 = CoarseningNode.prototype.setNode1;
-   this.setNode2 = CoarseningNode.prototype.setNode2;
-   this.setReference = CoarseningNode.prototype.setReference;
-   this.setWeight = CoarseningNode.prototype.setWeight;*/
 }
 
 

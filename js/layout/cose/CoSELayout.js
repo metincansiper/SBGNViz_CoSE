@@ -23,87 +23,6 @@ for (var prop in FDLayout) {
   CoSELayout[prop] = FDLayout[prop];
 }
 
-CoSELayout.prototype.run = function () {
-  //var options = this.options;
-  var eles = layoutOptionsPack.eles; // elements to consider in the layout
-  var layout = this;
-
-  layout.trigger('layoutstart');
-
-  var root = this.graphManager;
-  var orphans = [];
-  var nodes = eles.nodes();
-
-  for (var i = 0; i < nodes.length; i++) {
-    var theNode = nodes[i];
-    var p_id = theNode.data("parent");
-    if (p_id != null) {
-      if (allChildren[p_id] == null) {
-        allChildren[p_id] = [];
-      }
-      allChildren[p_id].push(theNode);
-    }
-    else {
-      orphans.push(theNode);
-    }
-  }
-
-  //add nodes to the graph manager in correct order
-//  this.processChildrenList(root, orphans);
-
-  eles.nodes().positions(function (i, ele) {
-    //console.log(eles.nodes()[i].data('id'));
-    return {
-      x: i * 50,
-      y: i * 50
-    };
-  });
-
-  // trigger layoutready when each node has had its position set at least once
-//  layout.one('layoutready', layoutOptionsPack.ready);
-//  layout.trigger('layoutready');
-
-  // trigger layoutstop when the layout stops (e.g. finishes)
-//  layout.one('layoutstop', layoutOptionsPack.stop);
-//  layout.trigger('layoutstop');
-
-  return this; // chaining
-};
-
-/**
- * @brief : called on continuous layouts to stop them before they finish
- */
-CoSELayout.prototype.stop = function () {
-  this.stopped = true;
-
-  return this; // chaining
-};
-
-
-CoSELayout.prototype.processChildrenList = function (parent, children) {
-  var size = children.length;
-  for (var i = 0; i < size; i++) {
-    var theChild = children[i];
-    var children_of_children = allChildren[theChild.data("id")];
-
-    console.log(theChild.data("id"));
-
-    if (children_of_children == null || children_of_children.length == 0) {
-      //parent.add(newNode(theChild));
-    }
-    else {
-      var theNewGraph;
-      if (parent == this.graphManager) {
-        //theNewGraph = graphManager.addRoot();
-      }
-      else {
-        //theNewGraph = parent.add(newGraph(theChild));
-      }
-      this.processChildrenList(theNewGraph, children_of_children);
-    }
-  }
-};
-
 CoSELayout.prototype.newGraphManager = function () {
   var gm = new CoSEGraphManager(this);
   this.graphManager = gm;
@@ -136,8 +55,6 @@ CoSELayout.prototype.initParameters = function () {
 
     this.useSmartIdealEdgeLengthCalculation =
             layoutOptionsPack.smartEdgeLengthCalc;
-//            this.useMultiLevelScaling =
-//                    layoutOptionsPack.multiLevelScaling;
     this.springConstant =
             Layout.transform(layoutOptionsPack.springStrength,
                     FDLayoutConstants.DEFAULT_SPRING_STRENGTH, 5.0, 5.0);
@@ -168,53 +85,10 @@ CoSELayout.prototype.layout = function () {
     // reset edge list, since the topology has changed
     this.graphManager.resetAllEdges();
   }
-
-//        if (this.useMultiLevelScaling && !this.incremental)
-//        {
-//            return this.multiLevelScalingLayout();
-//        }
-//  else
-//  {
+  
   this.level = 0;
   return this.classicLayout();
-//  }
 };
-
-//    CoSELayout.prototype.multiLevelScalingLayout = function () {
-//        var gm = this.graphManager;
-//
-//        // Start coarsening process
-//
-//        // save graph managers M0 to Mk in an array list
-//        this.MList = gm.coarsenGraph();
-//
-//        this.noOfLevels = MList.length - 1;
-//        this.level = this.noOfLevels;
-//
-//        while (this.level >= 0)
-//        {
-//            this.graphManager = gm = this.MList.get(this.level);
-//
-////			System.out.print("@" + this.level + "th level, with " + gm.getRoot().getNodes().length + " nodes. ");
-//            this.classicLayout();
-//
-//            // after finishing layout of first (coarsest) level,
-//            this.incremental = true;
-//
-//            if (this.level >= 1)
-//            {
-//                this.uncoarsen(); // also makes initial placement for Mi-1
-//            }
-//
-//            // reset total iterations
-//            this.totalIterations = 0;
-//
-//            this.level--;
-//        }
-//
-//        this.incremental = false;
-//        return true;
-//    }
 
 CoSELayout.prototype.classicLayout = function () {
   this.calculateNodesToApplyGravitationTo();
@@ -239,10 +113,10 @@ CoSELayout.prototype.classicLayout = function () {
       this.positionNodesRandomly();
     }
   }
-//  this.graphManager.printTopology();
+  
   this.initSpringEmbedder();
   this.runSpringEmbedder();
-//  this.graphManager.printTopology();
+  
   console.log("Classic CoSE layout finished after " +
           this.totalIterations + " iterations");
 
@@ -282,14 +156,6 @@ CoSELayout.prototype.runSpringEmbedder = function () {
     var rect2 = all[1].rect;
     var rect3 = all[2].rect;
     var asd = 0;
-//    for(var i = 0; i < all.length; i++){
-//      var node = all[i];
-//      var rectd = node.rect;
-//      
-//    }
-    if(this.totalIterations == 89){
-      var a = 5;
-    }
   }
   while (this.totalIterations < this.maxIterations);
   
@@ -562,12 +428,6 @@ CoSELayout.prototype.uncoarsen = function () {
 
     if (v.getPred2() != null)
     {
-      // TODO: check 
-      /*
-       double w = v.getPred1().getRect().width;
-       double l = this.idealEdgeLength;
-       v.getPred2().setLocation((v.getPred1().getLeft()+w+l), (v.getPred1().getTop()+w+l));
-       */
       v.getPred2().setLocation(v.getLeft() + this.idealEdgeLength,
               v.getTop() + this.idealEdgeLength);
     }
