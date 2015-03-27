@@ -6,11 +6,6 @@
 
 function CoSEGraphManager(layout) {
   LGraphManager.call(this, layout);
-  /*this.addEdges = CoSEGraphManager.prototype.addEdges;
-   this.coarsen = CoSEGraphManager.prototype.coarsen;
-   this.coarsenGraph = CoSEGraphManager.prototype.coarsenGraph;
-   this.coarsenNodes = CoSEGraphManager.prototype.coarsenNodes;
-   this.convertToCoarseningGraph = CoSEGraphManager.prototype.convertToCoarseningGraph;*/
 }
 
 //Extends LGraphManager

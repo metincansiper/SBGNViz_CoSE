@@ -6,12 +6,6 @@ function CoarseningGraph(parent, layout, vGraph) {
     parent = null;
     this.layout = layout;
   }
-  //this.prototype = new LGraph();
-  /*this.coarsen = CoarseningGraph.prototype.coarsen;
-   this.contract = CoarseningGraph.prototype.contract;
-   this.getLayout = CoarseningGraph.prototype.getLayout;
-   this.setLayout = CoarseningGraph.prototype.setLayout;
-   this.unmatchAll = CoarseningGraph.prototype.unmatchAll;*/
 }
 
 //extends LGraph

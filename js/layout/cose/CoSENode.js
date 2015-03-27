@@ -19,18 +19,6 @@ function CoSENode(gm, loc, size, vNode) {
    * so it can already be processed during the coarsening process
    */
   this.processed;
-
-  /*this.getNext = CoSENode.prototype.getNext;
-   this.getPred1 = CoSENode.prototype.getPred1;
-   this.getPred2 = CoSENode.prototype.getPred2;
-   this.isProcessed = CoSENode.prototype.isProcessed;
-   this.move = CoSENode.prototype.move;
-   this.propogateDisplacementToChildren = CoSENode.prototype.propogateDisplacementToChildren;
-   this.setNext = CoSENode.prototype.setNext;
-   this.setPred1 = CoSENode.prototype.setPred1;
-   this.setPred2 = CoSENode.prototype.setPred2;
-   this.setProcessed = CoSENode.prototype.setProcessed;*/
-
 }
 
 
@@ -68,18 +56,16 @@ CoSENode.prototype.move = function ()
             IMath.sign(this.displacementY);
   }
 
-//  throw "buraya da bak child objesi extend sayesinde buraya gelmiş mi " +
-//          "bide .size methodu normal array'da calisiyor mu"
-  if (this.child == null)
-          // a simple node, just move it
-          {
-            this.moveBy(this.displacementX, this.displacementY);
-          }
-  else if (this.child.getNodes().length == 0)
-          // an empty compound node, again just move it
-          {
-            this.moveBy(this.displacementX, this.displacementY);
-          }
+  // a simple node, just move it
+  if (this.child == null)       
+  {
+    this.moveBy(this.displacementX, this.displacementY);
+  }
+  // an empty compound node, again just move it
+  else if (this.child.getNodes().length == 0)        
+  {
+    this.moveBy(this.displacementX, this.displacementY);
+  }
   // non-empty compound node, propogate movement to children as well
   else
   {
@@ -106,7 +92,6 @@ CoSENode.prototype.move = function ()
  */
 CoSENode.prototype.propogateDisplacementToChildren = function (dX, dY)
 {
-//  throw "iterator yerine direk listeyi alip üstünden gecildi calisiyo mu diye bak"
   var nodes = this.getChild().getNodes();
   var node;
   for (var i = 0; i < nodes.length; i++)
@@ -167,5 +152,3 @@ CoSENode.prototype.isProcessed = function ()
 {
   return processed;
 };
-
-
