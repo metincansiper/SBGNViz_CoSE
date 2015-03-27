@@ -50,7 +50,7 @@ function LNode(gm, loc, size, vNode) {
   /*
    * List of clusters, this node belongs to.
    */
-  this.clusters;
+//  this.clusters;
 
   /*
    * Estimated initial size (needed for compound node size estimation)
@@ -71,7 +71,7 @@ function LNode(gm, loc, size, vNode) {
   this.vGraphObject = vNode;
   //in java: this.initialize();
   this.edges = [];
-  this.clusters = [];
+//  this.clusters = [];
   //---------------------------
   this.graphManager = gm;
 
@@ -269,32 +269,6 @@ LNode.prototype.moveBy = function (dx, dy)
   this.rect.x += dx;
   this.rect.y += dy;
 };
-
-/**
- * This method returns the cluster ID of this node.
- * Use with caution, because it returns the cluster id of the first cluster.
- * If a node has multiple clusters, remaining cluster information
- * may be accessed by getClusters() method.
- */
-LNode.prototype.getClusterID = function ()
-{
-  if (this.clusters.length == 0)
-  {
-    return null;
-  }
-
-  throw "burası böyle miymiş debuggerdan kontrol et"
-  return "" + this.clusters[0].clusterID;
-};
-
-/**
- * This method returns the list of clusters this node belongs to.
- */
-LNode.prototype.getClusters = function ()
-{
-  return this.clusters;
-};
-
 
 // -----------------------------------------------------------------------------
 // Section: Remaining methods
@@ -594,120 +568,6 @@ LNode.prototype.transform = function (trans)
   this.setLocation(vLeftTop.x, vLeftTop.y);
 };
 
-// -----------------------------------------------------------------------------
-// Section: implementation of clustered interface
-// -----------------------------------------------------------------------------
-/**
- * This method add this node model into a cluster with given cluster ID. If
- * such cluster doesn't exist in ClusterManager, it creates a new cluster.
- */
-LNode.prototype.addCluster = function (clusterID)
-{
-  if (typeof (id) === 'number') {
-    //get cluster manager of the graph manager of this LNode
-    var cm = this.graphManager.getClusterManager();
-    var cluster = cm.getClusterByID(clusterID);
-
-    if (cluster == null)
-    {
-      cluster = new Cluster(cm, clusterID, "Cluster " + clusterID);
-      cm.addCluster(cluster);
-    }
-
-    this.addCluster(cluster);
-  } else {
-    if (cluster == null)
-    {
-      return;
-    }
-
-    // check if it is not added before
-    if (this.clusters.indexof(cluster) == -1)
-    {
-      // add given cluster into list of clusters
-      this.clusters.push(cluster);
-
-      // add this node to set of nodes of the cluster
-      cluster.getNodes().push(this);
-
-      // if this node is a compound node
-      if (this.child != null)
-      {
-        // get all nodes of the child graph
-        // child nodes may be compound as well
-        var childrenNodes = this.child.getNodes();
-        var s = childrenNodes.length;
-        // iterate over each child node
-        for (var i = 0; i < s; i++)
-        {
-          var childNode = childrenNodes[i];
-
-          // recursively add children nodes to the cluster
-          childNode.addCluster(cluster);
-        }
-      }
-    }
-  }
-};
-
-/**
- * This method removes the cluster from clustered object's clusters
- */
-LNode.prototype.removeCluster = function (cluster)
-{
-  if (cluster == null)
-  {
-    return;
-  }
-
-  // check if given cluster exists
-  if (this.clusters.indexof(cluster) != -1)
-  {
-    // remove given cluster from list of clusters
-    var index = this.clusters.indexof(cluster);
-    this.clusters.splice(index, 1);
-
-    // remove this node from set of nodes of the cluster
-    index = cluster.getNodes().indexof(this);
-    cluster.getNodes().splice(index, 1);
-
-    // if this node is a compound node
-    if (this.child != null)
-    {
-      // get all nodes of the child graph
-      // child nodes may be compound as well
-      var childrenNodes = this.child.getNodes();
-
-      var itr = childrenNodes.iterator();
-      throw "iterator kısmına bi bak";
-
-      // iterate over each child node
-      while (itr.hasNext())
-      {
-        var childNode = itr.next();
-
-        // recursively remove children nodes from the cluster
-        childNode.removeCluster(cluster);
-      }
-    }
-  }
-};
-
-/**
- * This method resets all clusters of the clustered object
- */
-LNode.prototype.resetClusters = function ()
-{
-  for (var i in this.clusters)
-  {
-    var cluster = this.clusters[i];
-    var nodes = cluster.getNodes();
-    var index = nodes.indexof(this);
-    nodes.splice(index, 1);
-  }
-  this.clusters = [];
-};
-
 /**
  * This method returns the left of this node.
  */
@@ -752,23 +612,6 @@ LNode.prototype.getParent = function ()
   }
 
   return this.owner.getParent();
-};
-
-/**
- * This method checks if this node belongs to the given cluster
- * Returns boolean true if this node belongs to the given cluster,
- * and boolean false otherwise
- */
-LNode.prototype.belongsToCluster = function (cluster)
-{
-  if (this.clusters.indexof(cluster) != -1)
-  {
-    return true;
-  }
-  else
-  {
-    return false;
-  }
 };
 
 // -----------------------------------------------------------------------------

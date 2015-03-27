@@ -47,7 +47,7 @@ function LGraphManager(layout) {
   /*
    * Cluster Manager of all graphs managed by this graph manager
    */
-  this.clusterManager = null;
+//  this.clusterManager = null;
 
 
   this.graphs = [];
@@ -56,7 +56,7 @@ function LGraphManager(layout) {
   this.allEdges = null;
   this.allNodesToApplyGravitation = null;
   this.rootGraph = null;
-  this.clusterManager = new ClusterManager();
+//  this.clusterManager = new ClusterManager();
 }
 
 /**
@@ -258,10 +258,10 @@ LGraphManager.prototype.updateBounds = function ()
  * This method returns the cluster manager of all graphs managed by this
  * graph manager.
  */
-LGraphManager.prototype.getClusterManager = function ()
-{
-  return this.clusterManager;
-};
+//LGraphManager.prototype.getClusterManager = function ()
+//{
+//  return this.clusterManager;
+//};
 
 /**
  * This method retuns the list of all graphs managed by this graph manager.
