@@ -186,7 +186,6 @@ Cluster.prototype.findPoints = function ()
     return;
   }
 
-  //Iterator<Clustered> nodeItr = this.nodes.iterator();
   var node;
   var iterator = [];
   this.nodes.addAllTo(iterator);

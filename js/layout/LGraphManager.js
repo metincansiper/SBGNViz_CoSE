@@ -57,8 +57,6 @@ function LGraphManager(layout) {
   this.allNodesToApplyGravitation = null;
   this.rootGraph = null;
   this.clusterManager = new ClusterManager();
-  
-
 }
 
 /**

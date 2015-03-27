@@ -60,31 +60,6 @@ function LGraph(parent, obj2, vGraph) {
   else if (obj2 != null && obj2 instanceof Layout) {
     this.graphManager = obj2.graphManager;
   }
-
-  /*LGraph.add = LGraph.prototype.add;
-   LGraph.calcEstimatedSize = LGraph.prototype.calcEstimatedSize;
-   LGraph.calculateBounds = LGraph.prototype.calculateBounds;
-   LGraph.getBiggerDimension = LGraph.prototype.getBiggerDimension;
-   LGraph.getBottom = LGraph.prototype.getBottom;
-   LGraph.getEdges = LGraph.prototype.getEdges;
-   LGraph.getEstimatedSize = LGraph.prototype.getEstimatedSize;
-   LGraph.getGraphManager = LGraph.prototype.getGraphManager;
-   LGraph.getInclusionTreeDepth = LGraph.prototype.getInclusionTreeDepth;
-   LGraph.getLeft = LGraph.prototype.getLeft;
-   LGraph.getMargin = LGraph.prototype.getMargin;
-   LGraph.getNodes = LGraph.prototype.getNodes;
-   LGraph.getParent = LGraph.prototype.getParent;
-   LGraph.getRight = LGraph.prototype.getRight;
-   LGraph.getTop = LGraph.prototype.getTop;
-   LGraph.isConnected = LGraph.prototype.isConnected;
-   LGraph.printTopology = LGraph.prototype.printTopology;
-   LGraph.remove = LGraph.prototype.remove;
-   LGraph.reverse = LGraph.prototype.reverse;
-   LGraph.setEstimatedSize = LGraph.prototype.setEstimatedSize;
-   LGraph.setMargin = LGraph.prototype.setMargin;
-   LGraph.updateBounds = LGraph.prototype.updateBounds;
-   LGraph.updateConnected = LGraph.prototype.updateConnected;
-   LGraph.updateLeftTop = LGraph.prototype.updateLeftTop;*/
 }
 
 //extends LGraphObject
