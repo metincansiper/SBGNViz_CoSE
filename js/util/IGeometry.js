@@ -10,7 +10,6 @@ function IGeometry() {
  */
 IGeometry.calcSeparationAmount = function (rectA, rectB, overlapAmount, separationBuffer)
 {
-  //assert rectA.intersects(rectB);
   if (!rectA.intersects(rectB)) {
     throw "assert failed";
   }
@@ -22,75 +21,75 @@ IGeometry.calcSeparationAmount = function (rectA, rectB, overlapAmount, separati
           Math.max(rectA.y, rectB.y);
   // update the overlapping amounts for the following cases:
 
+  /* Case x.1:
+   *
+   * rectA
+   * 	|                       |
+   * 	|        _________      |
+   * 	|        |       |      |
+   * 	|________|_______|______|
+   * 			 |       |
+   *           |       |
+   *        rectB
+   */
   if ((rectA.getX() <= rectB.getX()) && (rectA.getRight() >= rectB.getRight()))
-          /* Case x.1:
-           *
-           * rectA
-           * 	|                       |
-           * 	|        _________      |
-           * 	|        |       |      |
-           * 	|________|_______|______|
-           * 			 |       |
-           *           |       |
-           *        rectB
-           */
-          {
-            overlapAmount[0] += Math.min((rectB.getX() - rectA.getX()),
-                    (rectA.getRight() - rectB.getRight()));
-          }
+  {
+    overlapAmount[0] += Math.min((rectB.getX() - rectA.getX()),
+            (rectA.getRight() - rectB.getRight()));
+  }
+  /* Case x.2:
+   *
+   * rectB
+   * 	|                       |
+   * 	|        _________      |
+   * 	|        |       |      |
+   * 	|________|_______|______|
+   * 			 |       |
+   *           |       |
+   *        rectA
+   */
   else if ((rectB.getX() <= rectA.getX()) && (rectB.getRight() >= rectA.getRight()))
-          /* Case x.2:
-           *
-           * rectB
-           * 	|                       |
-           * 	|        _________      |
-           * 	|        |       |      |
-           * 	|________|_______|______|
-           * 			 |       |
-           *           |       |
-           *        rectA
-           */
-          {
-            overlapAmount[0] += Math.min((rectA.getX() - rectB.getX()),
-                    (rectB.getRight() - rectA.getRight()));
-          }
+  {
+    overlapAmount[0] += Math.min((rectA.getX() - rectB.getX()),
+            (rectB.getRight() - rectA.getRight()));
+  }
 
+  /* Case y.1:
+   *          ________ rectA
+   *         |
+   *         |
+   *   ______|____  rectB
+   *         |    |
+   *         |    |
+   *   ______|____|
+   *         |
+   *         |
+   *         |________
+   *
+   */
   if ((rectA.getY() <= rectB.getY()) && (rectA.getBottom() >= rectB.getBottom()))
-          /* Case y.1:
-           *          ________ rectA
-           *         |
-           *         |
-           *   ______|____  rectB
-           *         |    |
-           *         |    |
-           *   ______|____|
-           *         |
-           *         |
-           *         |________
-           *
-           */
-          {
-            overlapAmount[1] += Math.min((rectB.getY() - rectA.getY()),
-                    (rectA.getBottom() - rectB.getBottom()));
-          }
+  {
+    overlapAmount[1] += Math.min((rectB.getY() - rectA.getY()),
+            (rectA.getBottom() - rectB.getBottom()));
+  }
+  /* Case y.2:
+   *          ________ rectB
+   *         |
+   *         |
+   *   ______|____  rectA
+   *         |    |
+   *         |    |
+   *   ______|____|
+   *         |
+   *         |
+   *         |________
+   *
+   */
   else if ((rectB.getY() <= rectA.getY()) && (rectB.getBottom() >= rectA.getBottom()))
-          /* Case y.2:
-           *          ________ rectB
-           *         |
-           *         |
-           *   ______|____  rectA
-           *         |    |
-           *         |    |
-           *   ______|____|
-           *         |
-           *         |
-           *         |________
-           *
-           */
-          {
-            overlapAmount[1] += Math.min((rectA.getY() - rectB.getY()),
-                    (rectB.getBottom() - rectA.getBottom()));
-          }
+  {
+    overlapAmount[1] += Math.min((rectA.getY() - rectB.getY()),
+            (rectB.getBottom() - rectA.getBottom()));
+  }
 
   // find slope of the line passes two centers
   var slope = Math.abs((rectB.getCenterY() - rectA.getCenterY()) /

@@ -6,7 +6,6 @@ function HashSet() {
 HashSet.prototype.add = function (obj) {
   var theId = UniqueIDGeneretor.createID(obj);
   if (!this.contains(theId))
-//    this.set[JSON.stringify(obj)] = obj;
     this.set[theId] = obj;
 };
 
@@ -19,7 +18,6 @@ HashSet.prototype.clear = function () {
 };
 
 HashSet.prototype.contains = function (obj) {
-//  return this.set[JSON.stringify(obj)] != null;
   return this.set[UniqueIDGeneretor.createID(obj)] == obj;
 };
 
