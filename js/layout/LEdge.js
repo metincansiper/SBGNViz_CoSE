@@ -55,28 +55,6 @@ function LEdge(source, target, vEdge) {
 
   this.source = source;
   this.target = target;
-
-  /*this.getBendpoints = LEdge.prototype.getBendpoints;
-   this.getLca = LEdge.prototype.getLca;
-   this.getLength = LEdge.prototype.getLength;
-   this.getLengthX = LEdge.prototype.getLengthX;
-   this.getLengthY = LEdge.prototype.getLengthY;
-   this.getOtherEnd = LEdge.prototype.getOtherEnd;
-   this.getOtherEndInGraph = LEdge.prototype.getOtherEndInGraph;
-   this.getSource = LEdge.prototype.getSource;
-   this.getSourceInLca = LEdge.prototype.getSourceInLca;
-   this.getTarget = LEdge.prototype.getTarget;
-   this.getTargetInLca = LEdge.prototype.getTargetInLca;
-   this.isInterGraph = LEdge.prototype.isInterGraph;
-   this.isOverlapingSourceAndTarget = LEdge.prototype.isOverlapingSourceAndTarget;
-   this.printTopology = LEdge.prototype.printTopology;
-   this.reRoute = LEdge.prototype.reRoute;
-   this.resetOverlapingSourceAndTarget = LEdge.prototype.resetOverlapingSourceAndTarget;
-   this.setSource = LEdge.prototype.setSource;
-   this.setTarget = LEdge.prototype.setTarget;
-   this.updateLength = LEdge.prototype.updateLength;
-   this.updateLengthSimple = LEdge.prototype.updateLengthSimple;*/
-
 }
 
 LEdge.prototype = Object.create(LGraphObject.prototype);
@@ -328,4 +306,3 @@ LEdge.prototype.printTopology = function ()
 //    (this.source.label == null ? "?" : this.source.label) + "-" +
 //    (this.target.label == null ? "?" : this.target.label) + "] ");
 }
-

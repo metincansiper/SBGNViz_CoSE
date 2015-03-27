@@ -57,31 +57,6 @@ function LGraphManager(layout) {
   this.allNodesToApplyGravitation = null;
   this.rootGraph = null;
   this.clusterManager = new ClusterManager();
-  
-  /*this.add = LGraphManager.prototype.add;
-  this.addRoot = LGraphManager.prototype.addRoot;
-  this.calcInclusionTreeDepths = LGraphManager.prototype.calcInclusionTreeDepths;
-  this.calcLowestCommonAncestor = LGraphManager.prototype.calcLowestCommonAncestor;
-  this.calcLowestCommonAncestors = LGraphManager.prototype.calcLowestCommonAncestors;
-  this.getAllEdges = LGraphManager.prototype.getAllEdges;
-  this.getAllNodes = LGraphManager.prototype.getAllNodes;
-  this.getAllNodesToApplyGravitation = LGraphManager.prototype.getAllNodesToApplyGravitation;
-  this.getClusterManager = LGraphManager.prototype.getClusterManager;
-  this.getGraphs = LGraphManager.prototype.getGraphs;
-  this.getInterGraphEdges = LGraphManager.prototype.getInterGraphEdges;
-  this.getLayout = LGraphManager.prototype.getLayout;
-  this.getRoot = LGraphManager.prototype.getRoot;
-  this.includesInvalidEdge = LGraphManager.prototype.includesInvalidEdge;
-  this.isOneAncestorOfOther = LGraphManager.prototype.isOneAncestorOfOther;
-  this.printTopology = LGraphManager.prototype.printTopology;
-  this.remove = LGraphManager.prototype.remove;
-  this.resetAllEdges = LGraphManager.prototype.resetAllEdges;
-  this.resetAllNodes = LGraphManager.prototype.resetAllNodes;
-  this.resetAllNodesToApplyGravitation = LGraphManager.prototype.resetAllNodesToApplyGravitation;
-  this.setAllNodesToApplyGravitation = LGraphManager.prototype.setAllNodesToApplyGravitation;
-  this.setLayout = LGraphManager.prototype.setLayout;
-  this.setRootGraph = LGraphManager.prototype.setRootGraph;
-  this.updateBounds = LGraphManager.prototype.updateBounds;*/
 }
 
 /**

@@ -96,9 +96,6 @@ ClusterManager.prototype.removeCluster = function (cluster)
  */
 ClusterManager.prototype.isClusterIDUsed = function (clusterID)
 {
-  // get an iterator for cluster list
-  //Iterator<Cluster> itr = this.clusters.iterator();
-
   // iterate over all clusters and check if clusterID is used before
   for (var i = 0; i < this.clusters.length; i++)
   {
@@ -120,9 +117,6 @@ ClusterManager.prototype.isClusterIDUsed = function (clusterID)
  */
 ClusterManager.prototype.getClusterByID = function (clusterID)
 {
-  // get an iterator for cluster list
-  //Iterator<Cluster> itr = this.clusters.iterator();
-
   // iterate over all clusters and check if clusterID is same
   for (var i = 0; i < this.clusters.length; i++)
   {
@@ -146,9 +140,7 @@ ClusterManager.prototype.clearClusters = function ()
 {
   // first, copy of cluster ids is stored in order to prevent 
   // pointer problems
-  var clusterIDs = []
-
-  //Iterator<Cluster> iter = this.clusters.iterator();
+  var clusterIDs = [];
 
   for (var i = 0; i < this.clusters.length; i++)
   {
