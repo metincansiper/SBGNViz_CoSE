@@ -3,7 +3,6 @@ function FDLayoutEdge(source, target, vEdge) {
   this.idealLength = FDLayoutConstants.DEFAULT_EDGE_LENGTH;
 }
 
-
 FDLayoutEdge.prototype = Object.create(LEdge.prototype);
 
 for (var prop in LEdge) {

@@ -9,13 +9,6 @@
 
 function LNode(gm, loc, size, vNode) {
   //Alternative constructor 1 : LNode(LGraphManager gm, Point loc, Dimension size, Object vNode)
-//  if (size != null) {
-//    var tmp = vNode;
-//    vNode = size;
-//    size = loc;
-//    loc = tmp;
-//  }
-
   if (size == null && vNode == null) {
     vNode = loc;
   }
@@ -86,59 +79,13 @@ function LNode(gm, loc, size, vNode) {
     this.rect = new RectangleD(loc.x, loc.y, size.width, size.height);
   else
     this.rect = new RectangleD();
-
-  /*this.addCluster = LNode.prototype.addCluster;
-   this.belongsToCluster = LNode.prototype.belongsToCluster;
-   this.calcEstimatedSize = LNode.prototype.calcEstimatedSize;
-   this.getAllParents = LNode.prototype.getAllParents;
-   this.getBottom = LNode.prototype.getBottom;
-   this.getCenter = LNode.prototype.getCenter;
-   this.getCenterX = LNode.prototype.getCenterX;
-   this.getCenterY = LNode.prototype.getCenterY;
-   this.getChild = LNode.prototype.getChild;
-   this.getClusterID = LNode.prototype.getClusterID;
-   this.getClusters = LNode.prototype.getClusters;
-   this.getDiagonal = LNode.prototype.getDiagonal;
-   this.getEdgeListToNode = LNode.prototype.getEdgeListToNode;
-   this.getEdges = LNode.prototype.getEdges;
-   this.getEdgesBetween = LNode.prototype.getEdgesBetween;
-   this.getEstimatedSize = LNode.prototype.getEstimatedSize;
-   this.getHalfTheDiagonal = LNode.prototype.getHalfTheDiagonal;
-   this.getHeight = LNode.prototype.getHeight;
-   this.getInclusionTreeDepth = LNode.prototype.getInclusionTreeDepth;
-   this.getLeft = LNode.prototype.getLeft;
-   this.getLocation = LNode.prototype.getLocation;
-   this.getNeighborsList = LNode.prototype.getNeighborsList;
-   this.getOwner = LNode.prototype.getOwner
-   this.getParent = LNode.prototype.getParent;
-   this.getRect = LNode.prototype.getRect;
-   this.getRight = LNode.prototype.getRight;
-   this.getSuccessors = LNode.prototype.getSuccessors;
-   this.getTop = LNode.prototype.getTop;
-   this.getWidth = LNode.prototype.getWidth;
-   this.isNeighbor = LNode.prototype.isNeighbor;
-   this.moveBy = LNode.prototype.moveBy;
-   this.printTopology = LNode.prototype.printTopology;
-   this.removeCluster = LNode.prototype.removeCluster;
-   this.resetClusters = LNode.prototype.resetClusters;
-   this.scatter = LNode.prototype.scatter;
-   this.setCenter = LNode.prototype.setCenter;
-   this.setChild = LNode.prototype.setChild;
-   this.setHeight = LNode.prototype.setHeight;
-   this.setLocation = LNode.prototype.setLocation;
-   this.setOwner = LNode.prototype.setOwner;
-   this.setRect = LNode.prototype.setRect;
-   this.setWidth = LNode.prototype.setWidth;
-   this.transform = LNode.prototype.transform;
-   this.updateBounds = LNode.prototype.updateBounds;
-   this.withChildren = LNode.prototype.withChildren;*/
 }
-
 
 LNode.prototype = Object.create(LGraphObject.prototype);
 for (var prop in LGraphObject) {
   LNode[prop] = LGraphObject[prop];
 }
+
 // -----------------------------------------------------------------------------
 // Section: Accessors
 // -----------------------------------------------------------------------------
@@ -432,7 +379,7 @@ LNode.prototype.getNeighborsList = function ()
   {
     edge = obj;
 
-    if (edge.source.equals(this))//*********************************************
+    if (edge.source.equals(this))
     {
       neighbors.add(edge.target);
     }
@@ -689,10 +636,6 @@ LNode.prototype.addCluster = function (clusterID)
         // get all nodes of the child graph
         // child nodes may be compound as well
         var childrenNodes = this.child.getNodes();
-
-//        var itr = childrenNodes.iterator();
-//        throw "iterator kısmına bi bak";
-
         var s = childrenNodes.length;
         // iterate over each child node
         for (var i = 0; i < s; i++)
@@ -844,17 +787,5 @@ LNode.random = new RandomSeed(Layout.RANDOM_SEED);
  */
 LNode.prototype.printTopology = function ()
 {
-//  console.log(this.label == null ? "?" : this.label + "{");
-//  var edge;
-//  var otherEnd;
-//  var edges = this.edges;
-//  var s = edges.length;
-//  for (var i = 0; i < s; i++)
-//  {
-//    edge = edges[i];
-//    otherEnd = edge.getOtherEnd(this);
-//    console.log(otherEnd.label == null ? "?" : otherEnd.label + ",");
-//  }
-//  console.log("} ");
   console.log(this.rect.x + "\t" + this.rect.getY() + "\t" + this.rect.getWidth() + "\t" + this.rect.getHeight());
 }

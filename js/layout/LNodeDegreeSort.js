@@ -10,5 +10,5 @@ for (var prop in QuickSort) {
 
 LNodeDegreeSort.prototype.compare = function (node1, node2) {
   return (node2.getEdges().length > node1.getEdges().length);
-}
+};
 

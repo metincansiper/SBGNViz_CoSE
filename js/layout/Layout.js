@@ -77,28 +77,6 @@ function Layout(isRemoteUse) {
   if (isRemoteUse != null) {
     this.isRemoteUse = isRemoteUse;
   }
-
-  /* define function
-  this.createBendpointsFromDummyNodes = Layout.prototype.createBendpointsFromDummyNodes;
-  this.createDummyNodesForBendpoints = Layout.prototype.createDummyNodesForBendpoints;
-  this.doPostLayout = Layout.prototype.doPostLayout;
-  this.doPreLayout = Layout.prototype.doPreLayout;
-  this.getAllEdges = Layout.prototype.getAllEdges;
-  this.getAllNodes = Layout.prototype.getAllNodes;
-  this.getAllNodesToApplyGravitation = Layout.prototype.getAllNodesToApplyGravitation;
-  this.getFlatForest = Layout.prototype.getFlatForest;
-  this.getGraphManager = Layout.prototype.getGraphManager;
-  this.initParameters = Layout.prototype.initParameters;
-  this.newEdge = Layout.prototype.newEdge;
-  this.newGraph = Layout.prototype.newGraph;
-  this.newGraphManager = Layout.prototype.newGraphManager;
-  this.newNode = Layout.prototype.newNode;
-  this.positionNodesRandomly = Layout.prototype.positionNodesRandomly;
-  this.runLayout = Layout.prototype.runLayout;
-  this.setGraphManager = Layout.prototype.setGraphManager;
-  this.transform = Layout.prototype.transform;
-  this.update = Layout.prototype.update;
-  this.update2 = Layout.prototype.update2;*/
 }
 
 
@@ -189,7 +167,6 @@ Layout.prototype.runLayout = function ()
     }
 
     isLayoutSuccessfull = this.layout();
-    
 
     if (!this.isSubLayout)
     {
@@ -247,11 +224,9 @@ Layout.prototype.update2 = function () {
 
   // perform edge, node and root updates if layout is not called
   // remotely
-
   if (!this.isRemoteUse)
   {
     // update all edges
-
     var edge;
     var allEdges = this.graphManager.getAllEdges();
     for (var i = 0; i < allEdges.length; i++)
@@ -261,7 +236,6 @@ Layout.prototype.update2 = function () {
     }
 
     // recursively update nodes 
-
     var node;
     var nodes = this.graphManager.getRoot().getNodes();
     for (var i = 0; i < nodes.length; i++)
@@ -294,7 +268,6 @@ Layout.prototype.update = function (obj) {
     // if the l-level node is associated with a v-level graph object,
     // then it is assumed that the v-level node implements the
     // interface Updatable.
-
     if (node.vGraphObject != null)
     {
       // cast to Updatable without any type check
@@ -344,17 +317,13 @@ Layout.prototype.initParameters = function () {
   if (!this.isSubLayout)
   {
     this.layoutQuality = layoutOptionsPack.layoutQuality;
-
-    this.animationDuringLayout =
-            layoutOptionsPack.animationDuringLayout;
+    this.animationDuringLayout = layoutOptionsPack.animationDuringLayout;
     this.animationPeriod = Math.floor(Layout.transform(layoutOptionsPack.animationPeriod,
             LayoutConstants.DEFAULT_ANIMATION_PERIOD));
     this.animationOnLayout = layoutOptionsPack.animationOnLayout;
-
     this.incremental = layoutOptionsPack.incremental;
     this.createBendsAsNeeded = layoutOptionsPack.createBendsAsNeeded;
-    this.uniformLeafNodeSizes =
-            layoutOptionsPack.uniformLeafNodeSizes;
+    this.uniformLeafNodeSizes = layoutOptionsPack.uniformLeafNodeSizes;
   }
 
   if (this.animationDuringLayout)
@@ -530,7 +499,7 @@ Layout.prototype.getFlatForest = function ()
     {
       var temp = [];
       visited.addAllTo(temp);
-      flatForest=flatForest.concat(temp);
+      flatForest = flatForest.concat(temp);
       //unProcessedNodes.removeAll(visited);
       for (var i = 0; i < temp.length; i++) {
         var value = temp[i];
@@ -557,8 +526,7 @@ Layout.prototype.createDummyNodesForBendpoints = function (edge)
   var dummyNodes = [];
   var prev = edge.source;
 
-  var graph = this.graphManager.
-          calcLowestCommonAncestor(edge.source, edge.target);
+  var graph = this.graphManager.calcLowestCommonAncestor(edge.source, edge.target);
 
   for (var i = 0; i < edge.bendpoints.length; i++)
   {
@@ -620,7 +588,6 @@ Layout.prototype.createBendpointsFromDummyNodes = function ()
                 dummyNode.getCenterY());
 
         // update bendpoint's location according to dummy node
-
         var ebp = lEdge.bendpoints.get(i);
         ebp.x = p.x;
         ebp.y = p.y;
@@ -709,8 +676,6 @@ Layout.findCenterOfTree = function (nodes)
     centerNode = list[0];
   }
 
-  //Iterator<LNode> iter = list.iterator();
-
   for (var i = 0; i < list.length; i++)
   {
     var node = list[i];
@@ -730,9 +695,7 @@ Layout.findCenterOfTree = function (nodes)
   {
     var tempList2 = [];
     tempList2 = tempList2.concat(tempList);
-    //tempList.removeAll(tempList);
     tempList = [];
-    //iter = tempList2.iterator();
 
     for (var i = 0; i < tempList2.length; i++)
     {
@@ -748,7 +711,7 @@ Layout.findCenterOfTree = function (nodes)
       for (var j = 0; j < neighbours.length; j++)
       {
         var neighbour = neighbours[j];
-        if ( removedNodes.indexOf(neighbour) < 0)
+        if (removedNodes.indexOf(neighbour) < 0)
         {
           var otherDegree = remainingDegrees.get(neighbour);
           var newDegree = otherDegree - 1;
