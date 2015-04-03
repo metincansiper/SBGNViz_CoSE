@@ -1,6 +1,4 @@
 var layoutOptionsPack = {};
-layoutOptionsPack.padding = 5;
-layoutOptionsPack.fit = true;
 
 layoutOptionsPack.layoutQuality; // proof, default, draft
 layoutOptionsPack.animationDuringLayout; // T-F

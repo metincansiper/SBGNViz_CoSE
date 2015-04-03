@@ -5,10 +5,65 @@
 
   var allChildren = [];
   var idToLNode = {};
+  
+  var defaults = {
+    // Called on `layoutready`
+    ready               : function() {},
+
+    // Called on `layoutstop`
+    stop                : function() {},
+
+    // Number of iterations between consecutive screen positions update (0 -> only updated on the end)
+    refresh             : 0,
+    
+    // Whether to fit the network view after when done
+    fit                 : true, 
+
+    // Padding on fit
+    padding             : 5, 
+
+
+    // Whether to enable incremental mode
+    incremental           : false,
+    
+    // Whether to use the JS console to print debug messages
+    debug               : false,
+
+    // Node repulsion (non overlapping) multiplier
+    nodeRepulsion       : 4500,
+    
+    // Node repulsion (overlapping) multiplier
+    nodeOverlap         : 10,
+    
+    // Ideal edge (non nested) length
+    idealEdgeLength     : 50,
+    
+    // Divisor to compute edge forces
+    edgeElasticity      : 0.45,
+    
+    // Nesting factor (multiplier) to compute ideal edge length for nested edges
+    nestingFactor       : 0.1,
+    
+    // Gravity force (constant)
+    gravity             : 0.4, 
+    
+    // Maximum number of iterations to perform
+    numIter             : 2500,
+    
+    // Initial temperature (maximum node displacement)
+    initialTemp         : 200,
+    
+    // Cooling factor (how the temperature is reduced between consecutive iterations
+    coolingFactor       : 0.95, 
+    
+    // Lower temperature threshold (below this point the layout will end)
+    minTemp             : 1
+  };
+  
   var layout = new CoSELayout();
   function CoSELayout2(options) {
     fillCoseLayoutOptionsPack();
-    layoutOptionsPack = $$.util.extend({}, layoutOptionsPack, options);
+    this.options = $$.util.extend({}, defaults, options);
     FDLayoutConstants.getUserOptions(options);
   }
 
@@ -17,11 +72,11 @@
     idToLNode = {};
     layout = new CoSELayout();
     //var options = this.options;
-    var eles = layoutOptionsPack.eles; // elements to consider in the layout
+    var eles = this.options.eles; // elements to consider in the layout
 //    var layout = this;
 
     // cy is automatically populated for us in the constructor
-    var cy = layoutOptionsPack.cy; // jshint ignore:line
+    var cy = this.options.cy; // jshint ignore:line
 
 
     cy.trigger('layoutstart');
@@ -68,15 +123,15 @@
       };
     });
 
-    if (layoutOptionsPack.fit)
-      layoutOptionsPack.cy.fit(layoutOptionsPack.padding);
+    if (this.options.fit)
+      this.options.cy.fit(this.options.padding);
 
     //trigger layoutready when each node has had its position set at least once
-    cy.one('layoutready', layoutOptionsPack.ready);
+    cy.one('layoutready', this.options.ready);
     cy.trigger('layoutready');
 
     // trigger layoutstop when the layout stops (e.g. finishes)
-    cy.one('layoutstop', layoutOptionsPack.stop);
+    cy.one('layoutstop', this.options.stop);
     cy.trigger('layoutstop');
 
     return this; // chaining

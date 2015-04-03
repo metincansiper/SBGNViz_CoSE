@@ -14,7 +14,7 @@ function FDLayout() {
   this.initialCoolingFactor = 1.0;
   this.totalDisplacement = 0.0;
   this.oldTotalDisplacement = 0.0;
-  this.maxIterations = 2500;
+  this.maxIterations = FDLayoutConstants.MAX_ITERATIONS;
   this.totalIterations = null;
 
   /**
