@@ -9,6 +9,7 @@
   function CoSELayout2(options) {
     fillCoseLayoutOptionsPack();
     layoutOptionsPack = $$.util.extend({}, layoutOptionsPack, options);
+    FDLayoutConstants.getUserOptions(options);
   }
 
   CoSELayout2.prototype.run = function () {

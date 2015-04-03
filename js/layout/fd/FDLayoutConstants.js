@@ -1,6 +1,10 @@
 function FDLayoutConstants() {
 }
 
+FDLayoutConstants.getUserOptions = function(options){
+  FDLayoutConstants.DEFAULT_REPULSION_STRENGTH = options.nodeRepulsion;
+}
+
 FDLayoutConstants.DEFAULT_EDGE_LENGTH = 50;
 FDLayoutConstants.DEFAULT_SPRING_STRENGTH = 0.45;
 FDLayoutConstants.DEFAULT_REPULSION_STRENGTH = 4500.0;
