@@ -7,6 +7,7 @@
   var idToLNode = {};
   var layout = new CoSELayout();
   function CoSELayout2(options) {
+    fillCoseLayoutOptionsPack();
     layoutOptionsPack = $$.util.extend({}, layoutOptionsPack, options);
   }
 

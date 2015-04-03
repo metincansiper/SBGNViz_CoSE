@@ -11,7 +11,6 @@ var DEBUG;
  */
 function CoSELayout() {
   FDLayout.call(this);
-  fillCoseLayoutOptionsPack();
   this.level = null;
   this.noOfLevels = null;
   this.MList = null;
