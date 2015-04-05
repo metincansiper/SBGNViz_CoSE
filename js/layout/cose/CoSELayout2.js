@@ -62,9 +62,10 @@
   
   var layout = new CoSELayout();
   function CoSELayout2(options) {
-    fillCoseLayoutOptionsPack();
+    
     this.options = $$.util.extend({}, defaults, options);
     FDLayoutConstants.getUserOptions(options);
+    fillCoseLayoutOptionsPack();
   }
 
   CoSELayout2.prototype.run = function () {
@@ -125,6 +126,8 @@
 
     if (this.options.fit)
       this.options.cy.fit(this.options.padding);
+
+      console.log(FDLayoutConstants.DEFAULT_EDGE_LENGTH);
 
     //trigger layoutready when each node has had its position set at least once
     cy.one('layoutready', this.options.ready);
