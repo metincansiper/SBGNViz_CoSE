@@ -271,7 +271,7 @@
    * This method tiles each given member group separately. After each group is tiled,
    * the members are removed from the graph.
    */
-  var clearZeroDegreeMembers = function(layoutInfo, memberGroups){
+  var clearZeroDegreeMembers = function(layoutInfo, memberGroups){  
     var tiledZeroDegreePack = [];
 
     for(var id in memberGroups){
@@ -281,8 +281,8 @@
       tiledZeroDegreePack[id] = tileNodes(layoutInfo, complexNode, memberGroups[id]);
 
       // Set the width and height of the dummy complex as calculated
-      complexNode.width = tiledZeroDegreePack[id].width;
-      complexNode.height = tiledZeroDegreePack[id].height;
+      complexNode.rect.width = tiledZeroDegreePack[id].width;
+      complexNode.rect.height = tiledZeroDegreePack[id].height;
     }
     return tiledZeroDegreePack;
   };
@@ -374,7 +374,7 @@
     }
     
     return tiledMemberPack;
-  };
+  }; 
   
   /**
    *  This method places each node in the given list.

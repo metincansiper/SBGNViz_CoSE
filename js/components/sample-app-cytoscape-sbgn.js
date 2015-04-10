@@ -167,7 +167,7 @@ var SBGNContainer = Backbone.View.extend({
                 container.cytoscapePanzoom(panProps);
 
                 cy.on('mouseover', 'node', function(evt){
-
+                  
                 });
 
                 cy.on('cxttap','node', function(event){
