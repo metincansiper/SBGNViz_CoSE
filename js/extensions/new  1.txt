@@ -1,0 +1,58 @@
+/**
+* This method finds each zero degree node in the graph that are not owned by a complex. 
+* If the number of zero degree nodes at any level is less than 2, no need to tile. 
+* Otherwise, create a dummy complex for each group. 
+*/
+groupZeroDegreeMembers //returns memberGroups which is a map for dummycomplexid's and their zero degree children
+
+/**
+* Removes children of each complex in the given list. Return a map of 
+* complexes and their children.
+*/
+clearComplexes 
+
+/**
+* Tile the children nodes of each complex and set the estimated width and height values
+* for future layout operations
+*/
+tileComplexMembers
+
+/**
+*  This method places each node in the given list.
+*/
+tileNodes
+
+/**
+* This method performs tiling. If a new row is needed, it creates the row
+* and places the new node there. Otherwise, it places the node to the end
+* of the specified row.
+*/
+insertNodeToRow
+
+/**
+* If moving the last node from the longest row and adding it to the last
+* row makes the bounding box smaller, do it.
+*/
+shiftToLastRow
+
+/**
+* This method checks whether adding extra width to the organization violates
+* the aspect ratio(1) or not.
+*/   
+canAddHorizontal
+
+/**
+* This method restores the deleted zero degree members and when the repopulation 
+* is completed, associated dummy complex is removed from the graph.
+*/
+repopulateZeroDegreeMembers
+
+/**
+* This method places each zero degree member wrt given (x,y) coordinates (top left). 
+*/
+adjustLocations
+
+/**
+*  Make the child graph of each complex visible and adjust the orientations
+*/   
+repopulateComplexes

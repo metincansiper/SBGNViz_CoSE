@@ -68,6 +68,7 @@
     this.cy.trigger('layoutstart');
 
     var gm = layout.newGraphManager();
+    this.gm = gm;
     
     var nodes = this.cy.nodes();
     var edges = this.cy.edges();
@@ -127,7 +128,7 @@
       var theId = ele.data('id');
       var lNode = idToLNode[theId];
       console.log(theId + "\t" + lNode.getRect().getX() + "\t" + lNode.getRect().getY());
-
+      
       return {
         x: lNode.getRect().getCenterX(),
         y: lNode.getRect().getCenterY()
@@ -245,7 +246,9 @@
       childGraphMap[complexOrder[i].id()] = complexOrder[i].children();
 
       // Remove children of complexes 
-      lComplexNode.child.nodes = []; 
+//      lComplexNode.child.nodes = []; 
+//      this.gm.remove(lComplexNode.child);
+        lComplexNode.child = null;
     }
   
     // Tile the removed children
@@ -264,7 +267,7 @@
     for(var id in memberGroups){
       var complexNode = idToLNode[id];
 
-      tiledZeroDegreePack[id] = this.tileNodes(complexNode, memberGroups[id]);
+      tiledZeroDegreePack[id] = this.tileNodes(memberGroups[id]);
 
       // Set the width and height of the dummy complex as calculated
       complexNode.rect.width = tiledZeroDegreePack[id].width;
@@ -280,8 +283,9 @@
     for(var i in tiledMemberPack){
       var lComplexNode = idToLNode[i];
 
-      this.adjustLocations(tiledMemberPack[i], lComplexNode.rect.x - lComplexNode.rect.width / 2, 
-        lComplexNode.rect.y - lComplexNode.rect.height / 2 );
+//      this.adjustLocations(tiledMemberPack[i], lComplexNode.rect.x - lComplexNode.rect.width / 2, 
+//        lComplexNode.rect.y - lComplexNode.rect.height / 2 );
+      this.adjustLocations(tiledMemberPack[i], lComplexNode.rect.x,lComplexNode.rect.y);
    }
   };
 
@@ -295,8 +299,9 @@
         var complexNode = idToLNode[i];
 
         // Adjust the positions of nodes wrt its complex
-        this.adjustLocations(tiledPack[i], complexNode.rect.x - complexNode.rect.width / 2, 
-          complexNode.rect.positionY - complexNode.rect.height / 2 );
+//        this.adjustLocations(tiledPack[i], complexNode.rect.x - complexNode.rect.width / 2, 
+//          complexNode.rect.y - complexNode.rect.height / 2 );
+          this.adjustLocations(tiledPack[i], complexNode.rect.x, complexNode.rect.y);
 
         // Remove the dummy complex
         complex.remove();
@@ -325,8 +330,8 @@
         node._private.position.x = x + lnode.rect.width / 2;
         node._private.position.y = y + lnode.rect.height / 2;
 
-        lnode.rect.x = x + lnode.rect.width / 2;
-        lnode.rect.y = y + lnode.rect.height / 2;
+        lnode.rect.x = x;// + lnode.rect.width / 2;
+        lnode.rect.y = y;// + lnode.rect.height / 2;
 
         lnode.removed = false;
         x += lnode.rect.width + organization.horizontalPadding;
