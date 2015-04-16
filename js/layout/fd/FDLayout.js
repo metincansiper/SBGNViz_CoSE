@@ -199,9 +199,9 @@ FDLayout.prototype.calcSpringForce = function (edge, idealLength) {
   var sourceNode = edge.getSource();
   var targetNode = edge.getTarget();
   
-  if(sourceNode.removed || targetNode.removed){
-    return;
-  }
+//  if(sourceNode.removed || targetNode.removed){
+//    return;
+//  }
   
   var length;
   var springForce;
@@ -317,9 +317,9 @@ FDLayout.prototype.calcRepulsionForce = function (nodeA, nodeB) {
 };
 
 FDLayout.prototype.calcGravitationalForce = function (node) {
-  if(node.removed){
-    return;
-  }
+//  if(node.removed){
+//    return;
+//  }
   var ownerGraph;
   var ownerCenterX;
   var ownerCenterY;
@@ -453,8 +453,8 @@ FDLayout.prototype.addNodeToGrid = function (v, grid, left, top) {
 FDLayout.prototype.calculateRepulsionForceOfANode = function (grid, nodeA, processedNodeSet) {
   var i, j;
 
-  if(nodeA.removed)
-    return;
+//  if(nodeA.removed)
+//    return;
   if (this.totalIterations % FDLayoutConstants.GRID_CALCULATION_CHECK_PERIOD == 1)
   {
     var surrounding = [];
@@ -471,9 +471,9 @@ FDLayout.prototype.calculateRepulsionForceOfANode = function (grid, nodeA, proce
           {
             nodeB = temp[i];
             
-            if(nodeB.removed){
-              continue;
-            }
+//            if(nodeB.removed){
+//              continue;
+//            }
             // If both nodes are not members of the same graph, 
             // or both nodes are the same, skip.
             if ((nodeA.getOwner() != nodeB.getOwner())

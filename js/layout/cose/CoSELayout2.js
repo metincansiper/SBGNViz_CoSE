@@ -109,6 +109,7 @@
       var e1 = gm.add(layout.newEdge(), sourceNode, targetNode);
     }
 
+    var tempallnodes = this.gm.getAllNodes();
     layout.runLayout();
 
     // Repopulate members
@@ -238,6 +239,9 @@
     var complexOrder = this.performDFSOnComplexes(options);
     
     this.processChildrenList(this.root, this.orphans);
+    var tempallnodes = this.gm.getAllNodes();
+    
+//    this.allNodes = this.gm.getAllNodes();
     
     for(var i = 0; i < complexOrder.length; i++) {
       // find the corresponding layout node
@@ -248,6 +252,7 @@
       // Remove children of complexes 
 //      lComplexNode.child.nodes = []; 
 //      this.gm.remove(lComplexNode.child);
+        
         lComplexNode.child = null;
     }
   
@@ -387,6 +392,15 @@
       var lNode = idToLNode[node.id()];
       lNode.removed = true;
 
+      var owner = lNode.owner;
+      owner.remove(lNode);
+      
+      this.gm.resetAllNodes();
+      this.gm.getAllNodes();
+      
+//      this.gm.resetAllEdges();
+//      this.gm.getAllEdges();
+
       layoutNodes.push(lNode);
     }
     
@@ -406,7 +420,7 @@
       if (organization.rows.length == 0) {
         this.insertNodeToRow(organization, lNode, 0);
       }
-      else if (this.canAddHorizontal(organization, lNode.width, lNode.height)) {
+      else if (this.canAddHorizontal(organization, lNode.rect.width, lNode.rect.height)) {
         this.insertNodeToRow(organization, lNode, this.getShortestRowIndex(organization));
       } 
       else {
