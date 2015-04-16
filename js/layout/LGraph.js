@@ -425,7 +425,7 @@ LGraph.prototype.updateBounds = function (recursive)
  * margins are accounted for, and it returns a rectangle with top-left set
  * to Integer.MAX_VALUE if the list is empty.
  */
-LGraph.prototype.calculateBounds = function (nodes)
+LGraph.calculateBounds = function (nodes)
 {
   var left = Integer.MAX_VALUE;
   var right = -Integer.MAX_VALUE;
@@ -468,7 +468,7 @@ LGraph.prototype.calculateBounds = function (nodes)
     }
   }
 
-  var boundingRect = new Rectangle(left, top, right - left, bottom - top);
+  var boundingRect = new RectangleD(left, top, right - left, bottom - top);
 
   return boundingRect;
 };

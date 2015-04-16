@@ -6,7 +6,7 @@ function HashSet() {
 HashSet.prototype.add = function (obj) {
   var theId = UniqueIDGeneretor.createID(obj);
   if (!this.contains(theId))
-    this.set[theId] = obj;
+    this.set[theId]  = obj;
 };
 
 HashSet.prototype.remove = function (obj) {
@@ -34,7 +34,7 @@ HashSet.prototype.addAllTo = function (list) {
   var keys = Object.keys(this.set);
   var length = keys.length;
   for (var i = 0; i < length; i++) {
-    list.push(keys[i]);
+    list.push(this.set[keys[i]]);
   }
 };
 HashSet.prototype.size = function () {

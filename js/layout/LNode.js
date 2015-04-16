@@ -307,7 +307,7 @@ LNode.prototype.getEdgesBetween = function (other)
 
   for (var obj in this.edges)
   {
-    edge = obj;
+    edge = this.edges[obj];
 
     if (!(edge.source == this || edge.target == this))
       throw "Incorrect edge source and/or target";
@@ -351,15 +351,15 @@ LNode.prototype.getNeighborsList = function ()
 
   for (var obj in this.edges)
   {
-    edge = obj;
+    edge = this.edges[obj];
 
-    if (edge.source.equals(this))
+    if (edge.source == this)
     {
       neighbors.add(edge.target);
     }
     else
     {
-      if (!edge.target.equals(this))
+      if (!edge.target == this)
         throw "Incorrect incidency!";
       neighbors.add(edge.source);
     }

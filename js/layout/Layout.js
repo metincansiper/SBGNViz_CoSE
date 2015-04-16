@@ -499,7 +499,8 @@ Layout.prototype.getFlatForest = function ()
     {
       var temp = [];
       visited.addAllTo(temp);
-      flatForest = flatForest.concat(temp);
+      flatForest.push(temp);
+      //flatForest = flatForest.concat(temp);
       //unProcessedNodes.removeAll(visited);
       for (var i = 0; i < temp.length; i++) {
         var value = temp[i];
@@ -679,8 +680,8 @@ Layout.findCenterOfTree = function (nodes)
   for (var i = 0; i < list.length; i++)
   {
     var node = list[i];
-    var degree = node.getNeighborsList().length;
-    remainingDegrees.put(node, node.getNeighborsList().length);
+    var degree = node.getNeighborsList().size();
+    remainingDegrees.put(node, node.getNeighborsList().size());
 
     if (degree == 1)
     {
@@ -697,9 +698,9 @@ Layout.findCenterOfTree = function (nodes)
     tempList2 = tempList2.concat(tempList);
     tempList = [];
 
-    for (var i = 0; i < tempList2.length; i++)
+    for (var i = 0; i < list.length; i++)
     {
-      var node = tempList2[i];
+      var node = list[i];
 
       var index = list.indexOf(node);
       if (index >= 0) {
@@ -708,9 +709,9 @@ Layout.findCenterOfTree = function (nodes)
 
       var neighbours = node.getNeighborsList();
 
-      for (var j = 0; j < neighbours.length; j++)
+      for (var j in neighbours.set)
       {
-        var neighbour = neighbours[j];
+        var neighbour = neighbours.set[j];
         if (removedNodes.indexOf(neighbour) < 0)
         {
           var otherDegree = remainingDegrees.get(neighbour);

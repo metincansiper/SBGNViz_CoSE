@@ -288,7 +288,7 @@ CoSELayout.prototype.positionNodesRadially = function (forest) {
 };
 
 CoSELayout.radialLayout = function (tree, centerNode, startingPoint) {
-  var radialSep = Math.max(maxDiagonalInTree(tree),
+  var radialSep = Math.max(this.maxDiagonalInTree(tree),
           CoSEConstants.DEFAULT_RADIAL_SEPARATION);
   CoSELayout.branchRadialLayout(centerNode, null, 0, 359, 0, radialSep);
   var bounds = LGraph.calculateBounds(tree);
@@ -301,7 +301,7 @@ CoSELayout.radialLayout = function (tree, centerNode, startingPoint) {
 
   for (var i = 0; i < tree.length; i++)
   {
-    var node = tree.get(i);
+    var node = tree[i];
     node.transform(transform);
   }
 

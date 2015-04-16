@@ -102,9 +102,29 @@ RectangleD.prototype.getCenterX = function ()
   return this.x + this.width / 2;
 };
 
+RectangleD.prototype.getMinX = function ()
+{
+  return this.getX();
+};
+
+RectangleD.prototype.getMaxX = function ()
+{
+  return this.getX() + this.width;
+};
+
 RectangleD.prototype.getCenterY = function ()
 {
   return this.y + this.height / 2;
+};
+
+RectangleD.prototype.getMinY = function ()
+{
+  return this.getY();
+};
+
+RectangleD.prototype.getMaxY = function ()
+{
+  return this.getY() + this.height;
 };
 
 RectangleD.prototype.getWidthHalf = function ()
