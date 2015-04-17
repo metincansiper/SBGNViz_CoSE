@@ -520,7 +520,7 @@
    * the aspect ratio(1) or not.
    */   
   CoSELayout2.prototype.canAddHorizontal = function(organization, extraWidth, extraHeight) {
-    var sri = this.getShortestRowIndex(organization);
+    /*var sri = this.getShortestRowIndex(organization);
 
     if (sri < 0) {
       return true;
@@ -538,6 +538,68 @@
     }
 
     return organization.height + hDiff > min + extraWidth + organization.horizontalPadding;
+    
+    
+    
+    */
+    
+    
+    
+    
+    
+    
+    
+    var sri = this.getShortestRowIndex(organization);
+
+    if (sri < 0) {
+      return true;
+    }
+    
+    var min = organization.rowWidth[sri];
+
+    var hDiff = 0;
+    
+    // Adding to an existing row
+    if(organization.rowHeight[sri] < extraHeight){
+      if(sri > 0)
+        hDiff = extraHeight + organization.verticalPadding - organization.rowHeight[sri];
+    }
+    
+    var add_to_row_ratio;
+    if (organization.width - min >= extraWidth + organization.horizontalPadding)  {
+      add_to_row_ratio = (organization.height + hDiff) / sri + extraWidth + organization.horizontalPadding;
+    } else {
+      add_to_row_ratio = (organization.height + hDiff) / organization.width;
+    }
+     
+    // Adding a new row for this node
+    hDiff = extraHeight + organization.verticalPadding;
+    var add_new_row_ratio;
+    if(organization.width < extraWidth){
+      add_new_row_ratio = (organization.height + hDiff) / extraWidth;
+    } else {
+      add_new_row_ratio = (organization.height + hDiff) / organization.width;
+    }
+    
+//    add_to_row_ratio = Math.abs(add_to_row_ratio - aspectRatio);
+//    add_new_row_ratio= Math.abs(add_new_row_ratio - aspectRatio);
+
+    if(add_new_row_ratio < 1)
+      add_new_row_ratio = 1 / add_new_row_ratio;
+    
+    if(add_to_row_ratio < 1)
+       add_to_row_ratio = 1 / add_to_row_ratio;
+      
+    
+//    return add_to_row_ratio > add_new_row_ratio;
+    return add_to_row_ratio < add_new_row_ratio;
+    
+    
+    
+    
+    
+    
+    
   };
   
   /**
