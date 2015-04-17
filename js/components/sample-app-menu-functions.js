@@ -166,6 +166,17 @@ $( document ).ready( function() {
             model : {cytoscapeJsGraph : sbgnmlToJson.convert(xmlObject)}
         })).render();
     });
+    
+    $("#load-sample7").click(function(e){
+        var xmlObject = loadXMLDoc('samples/MRN complex relocalizes to nuclear foci.sbgn');
+        
+        setFileContent("sample6.xml");
+
+        (new SBGNContainer({
+            el: '#sbgn-network-container',
+            model : {cytoscapeJsGraph : sbgnmlToJson.convert(xmlObject)}
+        })).render();
+    });
 
     $("#hide-selected").click(function(e){
         sbgnFiltering.hideSelected();

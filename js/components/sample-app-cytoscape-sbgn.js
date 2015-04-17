@@ -319,13 +319,13 @@ var SBGNLayout = Backbone.View.extend({
         $(self.el).dialog();        
 
         $("#save-layout").die("click").live("click", function(evt){
-            self.currentLayoutProperties.nodeRepulsion = document.getElementById("node-repulsion").value;
-            self.currentLayoutProperties.nodeOverlap = document.getElementById("node-overlap").value;
-            self.currentLayoutProperties.idealEdgeLength = document.getElementById("ideal-edge-length").value;
-            self.currentLayoutProperties.edgeElasticity = document.getElementById("edge-elasticity").value;
-            self.currentLayoutProperties.nestingFactor = document.getElementById("nesting-factor").value;
-            self.currentLayoutProperties.gravity = document.getElementById("gravity").value;
-            self.currentLayoutProperties.numIter = document.getElementById("num-iter").value;
+            self.currentLayoutProperties.nodeRepulsion  = Number(document.getElementById("node-repulsion").value);
+            self.currentLayoutProperties.nodeOverlap    = Number(document.getElementById("node-overlap").value);
+            self.currentLayoutProperties.idealEdgeLength= Number(document.getElementById("ideal-edge-length").value);
+            self.currentLayoutProperties.edgeElasticity = Number(document.getElementById("edge-elasticity").value);
+            self.currentLayoutProperties.nestingFactor  = Number(document.getElementById("nesting-factor").value);
+            self.currentLayoutProperties.gravity        = Number(document.getElementById("gravity").value);
+            self.currentLayoutProperties.numIter        = Number(document.getElementById("num-iter").value);
 
             $(self.el).dialog('close');
         });
