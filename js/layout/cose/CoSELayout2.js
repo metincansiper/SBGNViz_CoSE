@@ -567,7 +567,7 @@
     
     var add_to_row_ratio;
     if (organization.width - min >= extraWidth + organization.horizontalPadding)  {
-      add_to_row_ratio = (organization.height + hDiff) / sri + extraWidth + organization.horizontalPadding;
+      add_to_row_ratio = (organization.height + hDiff) / ( min + extraWidth + organization.horizontalPadding );
     } else {
       add_to_row_ratio = (organization.height + hDiff) / organization.width;
     }
