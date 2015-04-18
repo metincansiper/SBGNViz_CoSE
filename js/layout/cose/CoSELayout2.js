@@ -18,7 +18,7 @@
     // Whether to fit the network view after when done
     fit: true,
     // Padding on fit
-    padding: 5,
+    padding: 10,
     // Whether to enable incremental mode
     incremental: false,
     // Whether to use the JS console to print debug messages
@@ -138,6 +138,7 @@
 
     if (this.options.fit)
       this.options.cy.fit(this.options.padding);
+//      this.options.cy.fit(20);
 
     console.log(FDLayoutConstants.DEFAULT_EDGE_LENGTH);
 
