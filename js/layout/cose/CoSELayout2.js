@@ -343,7 +343,7 @@
         x += lnode.rect.width + organization.horizontalPadding;
 
         if(lnode.rect.height > maxHeight)
-          maxHeight = lnode.rect.height;
+          maxHeight = lnode.rect.height + organization.complexMargin;
       }
 
       y += maxHeight + organization.verticalPadding; 
