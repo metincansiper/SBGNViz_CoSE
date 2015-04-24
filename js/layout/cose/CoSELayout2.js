@@ -343,7 +343,7 @@
         x += lnode.rect.width + organization.horizontalPadding;
 
         if(lnode.rect.height > maxHeight)
-          maxHeight = lnode.rect.height + organization.complexMargin;
+          maxHeight = lnode.rect.height;
       }
 
       y += maxHeight + organization.verticalPadding; 
@@ -363,8 +363,8 @@
       
       tiledMemberPack[id] = this.tileNodes(childGraphMap[id]); 
       
-      complexNode.rect.width = tiledMemberPack[id].width;
-      complexNode.rect.height = tiledMemberPack[id].height;
+      complexNode.rect.width = tiledMemberPack[id].width + 20;
+      complexNode.rect.height = tiledMemberPack[id].height + 20;
     }
     
     return tiledMemberPack;
@@ -557,7 +557,10 @@
     }
     
     var min = organization.rowWidth[sri];
-
+    
+    if(min + organization.horizontalPadding + extraWidth <= organization.width)
+      return true;
+    
     var hDiff = 0;
     
     // Adding to an existing row
