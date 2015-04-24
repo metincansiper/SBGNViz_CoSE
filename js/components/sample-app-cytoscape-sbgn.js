@@ -327,12 +327,12 @@ var SBGNLayout = Backbone.View.extend({
             self.currentLayoutProperties.nestingFactor  = Number(document.getElementById("nesting-factor").value);
             self.currentLayoutProperties.gravity        = Number(document.getElementById("gravity").value);
             self.currentLayoutProperties.numIter        = Number(document.getElementById("num-iter").value);
-            self.currentLayoutProperties.tile           = document.getElementById("tile").value;
+            self.currentLayoutProperties.tile           = document.getElementById("tile").checked ;
             
-            if(self.currentLayoutProperties.tile === "true")
-              self.currentLayoutProperties.tile = true;
-            else
-              self.currentLayoutProperties.tile = false;
+//            if(self.currentLayoutProperties.tile === "true")
+//              self.currentLayoutProperties.tile = true;
+//            else
+//              self.currentLayoutProperties.tile = false;
             
             $(self.el).dialog('close');
         });
