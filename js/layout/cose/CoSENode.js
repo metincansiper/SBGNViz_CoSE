@@ -44,25 +44,37 @@ CoSENode.prototype.move = function ()
   this.displacementY = layout.coolingFactor *
           (this.springForceY + this.repulsionForceY + this.gravitationForceY);
 
-  if (Math.abs(this.displacementX) > layout.maxNodeDisplacement)
+//  if (Math.abs(this.displacementX) > layout.maxNodeDisplacement)
+//  {
+//    this.displacementX = layout.maxNodeDisplacement *
+//            IMath.sign(this.displacementX);
+//  }
+//
+//  if (Math.abs(this.displacementY) > layout.maxNodeDisplacement)
+//  {
+//    this.displacementY = layout.maxNodeDisplacement *
+//            IMath.sign(this.displacementY);
+//  }
+
+  if (Math.abs(this.displacementX) > layout.coolingFactor * layout.maxNodeDisplacement)
   {
-    this.displacementX = layout.maxNodeDisplacement *
+    this.displacementX = layout.coolingFactor * layout.maxNodeDisplacement *
             IMath.sign(this.displacementX);
   }
 
-  if (Math.abs(this.displacementY) > layout.maxNodeDisplacement)
+  if (Math.abs(this.displacementY) > layout.coolingFactor * layout.maxNodeDisplacement)
   {
-    this.displacementY = layout.maxNodeDisplacement *
+    this.displacementY = layout.coolingFactor * layout.maxNodeDisplacement *
             IMath.sign(this.displacementY);
   }
 
   // a simple node, just move it
-  if (this.child == null)       
+  if (this.child == null)
   {
     this.moveBy(this.displacementX, this.displacementY);
   }
   // an empty compound node, again just move it
-  else if (this.child.getNodes().length == 0)        
+  else if (this.child.getNodes().length == 0)
   {
     this.moveBy(this.displacementX, this.displacementY);
   }
