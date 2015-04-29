@@ -345,7 +345,6 @@
         lnode.rect.x = x;// + lnode.rect.width / 2;
         lnode.rect.y = y;// + lnode.rect.height / 2;
 
-        lnode.removed = false;
         x += lnode.rect.width + organization.horizontalPadding;
 
         if (lnode.rect.height > maxHeight)
@@ -397,7 +396,6 @@
     for (var i = 0; i < nodes.length; i++) {
       var node = nodes[i];
       var lNode = idToLNode[node.id()];
-      lNode.removed = true;
 
       var owner = lNode.owner;
       owner.remove(lNode);
@@ -685,7 +683,6 @@
       else {
         theNode = parent.add(new CoSENode(this.graphManager));
       }
-      theNode.removed = false;
       theNode.id = theChild.data("id");
       idToLNode[theChild.data("id")] = theNode;
       if (children_of_children != null && children_of_children.length > 0) {
