@@ -48,14 +48,14 @@
   };
 
   var layout = new CoSELayout();
-  function CoSELayout2(options) {
+  function _CoSELayout(options) {
 
     this.options = $$.util.extend({}, defaults, options);
     FDLayoutConstants.getUserOptions(options);
     fillCoseLayoutOptionsPack();
   }
 
-  CoSELayout2.prototype.run = function () {
+  _CoSELayout.prototype.run = function () {
     var options = this.options;
     allChildren = [];
     idToLNode = {};
@@ -164,7 +164,7 @@
    * If the number of zero degree nodes at any level is less than 2, no need to tile. 
    * Otherwise, create a dummy complex for each group. 
    */
-  CoSELayout2.prototype.groupZeroDegreeMembers = function () {
+  _CoSELayout.prototype.groupZeroDegreeMembers = function () {
     // array of [parent_id x oneDegreeNode_id] 
     var tempMemberGroups = [];
     var memberGroups = [];
@@ -215,7 +215,7 @@
    *  This method finds all the roots in the graph and performs depth first search
    *  to find all complexes.
    */
-  CoSELayout2.prototype.performDFSOnComplexes = function (options) {
+  _CoSELayout.prototype.performDFSOnComplexes = function (options) {
     var complexOrder = [];
 
     // Find roots
@@ -239,7 +239,7 @@
    * Removes children of each complex in the given list. Return a map of 
    * complexes and their children.
    */
-  CoSELayout2.prototype.clearComplexes = function (options) {
+  _CoSELayout.prototype.clearComplexes = function (options) {
     var childGraphMap = [];
 
     // Get complex ordering by finding the inner one first
@@ -273,7 +273,7 @@
    * This method tiles each given member group separately. After each group is tiled,
    * the members are removed from the graph.
    */
-  CoSELayout2.prototype.clearZeroDegreeMembers = function (memberGroups) {
+  _CoSELayout.prototype.clearZeroDegreeMembers = function (memberGroups) {
     var tiledZeroDegreePack = [];
 
     for (var id in memberGroups) {
@@ -291,7 +291,7 @@
   /**
    *  Make the child graph of each complex visible and adjust the orientations
    */
-  CoSELayout2.prototype.repopulateComplexes = function (tiledMemberPack) {
+  _CoSELayout.prototype.repopulateComplexes = function (tiledMemberPack) {
     for (var i in tiledMemberPack) {
       var lComplexNode = idToLNode[i];
 
@@ -305,7 +305,7 @@
    * This method restores the deleted zero degree members and when the repopulation 
    * is completed, associated dummy complex is removed from the graph.
    */
-  CoSELayout2.prototype.repopulateZeroDegreeMembers = function (tiledPack) {
+  _CoSELayout.prototype.repopulateZeroDegreeMembers = function (tiledPack) {
     for (var i in tiledPack) {
       var complex = this.cy.getElementById(i);
       var complexNode = idToLNode[i];
@@ -323,7 +323,7 @@
   /**
    * This method places each zero degree member wrt given (x,y) coordinates (top left). 
    */
-  CoSELayout2.prototype.adjustLocations = function (organization, x, y) {
+  _CoSELayout.prototype.adjustLocations = function (organization, x, y) {
     x += organization.complexMargin;
     y += organization.complexMargin;
 
@@ -360,7 +360,7 @@
    * Tile the children nodes of each complex and set the estimated width and height values
    * for future layout operations
    */
-  CoSELayout2.prototype.tileComplexMembers = function (childGraphMap) {
+  _CoSELayout.prototype.tileComplexMembers = function (childGraphMap) {
     var tiledMemberPack = [];
 
     for (var id in childGraphMap) {
@@ -379,7 +379,7 @@
   /**
    *  This method places each node in the given list.
    */
-  CoSELayout2.prototype.tileNodes = function (nodes) {
+  _CoSELayout.prototype.tileNodes = function (nodes) {
     var organization = {
       rows: [],
       rowWidth: [],
@@ -445,7 +445,7 @@
    * and places the new node there. Otherwise, it places the node to the end
    * of the specified row.
    */
-  CoSELayout2.prototype.insertNodeToRow = function (organization, node, rowIndex) {
+  _CoSELayout.prototype.insertNodeToRow = function (organization, node, rowIndex) {
     var minComplexSize = organization.complexMargin * 2;
 
     // Add new row if needed
@@ -491,7 +491,7 @@
   /**
    * Scans the rows of an organization and returns the one with the min width
    */
-  CoSELayout2.prototype.getShortestRowIndex = function (organization) {
+  _CoSELayout.prototype.getShortestRowIndex = function (organization) {
     var r = -1;
     var min = Number.MAX_VALUE;
 
@@ -507,7 +507,7 @@
   /**
    * Scans the rows of an organization and returns the one with the max width
    */
-  CoSELayout2.prototype.getLongestRowIndex = function (organization) {
+  _CoSELayout.prototype.getLongestRowIndex = function (organization) {
     var r = -1;
     var max = Number.MIN_VALUE;
 
@@ -526,7 +526,7 @@
    * This method checks whether adding extra width to the organization violates
    * the aspect ratio(1) or not.
    */
-  CoSELayout2.prototype.canAddHorizontal = function (organization, extraWidth, extraHeight) {
+  _CoSELayout.prototype.canAddHorizontal = function (organization, extraWidth, extraHeight) {
     /*var sri = this.getShortestRowIndex(organization);
      
      if (sri < 0) {
@@ -616,7 +616,7 @@
    * If moving the last node from the longest row and adding it to the last
    * row makes the bounding box smaller, do it.
    */
-  CoSELayout2.prototype.shiftToLastRow = function (organization) {
+  _CoSELayout.prototype.shiftToLastRow = function (organization) {
     var longest = this.getLongestRowIndex(organization);
     var last = organization.rowWidth.length - 1;
     var row = organization.rows[longest];
@@ -661,13 +661,13 @@
   /**
    * @brief : called on continuous layouts to stop them before they finish
    */
-  CoSELayout2.prototype.stop = function () {
+  _CoSELayout.prototype.stop = function () {
     this.stopped = true;
 
     return this; // chaining
   };
 
-  CoSELayout2.prototype.processChildrenList = function (parent, children) {
+  _CoSELayout.prototype.processChildrenList = function (parent, children) {
     var size = children.length;
     for (var i = 0; i < size; i++) {
       var theChild = children[i];
@@ -696,6 +696,6 @@
     }
   };
   // register the layout
-  $$('layout', 'cose', CoSELayout2);
+  $$('layout', 'cose', _CoSELayout);
 
 })(cytoscape);
