@@ -107,7 +107,7 @@ CoSEGraphManager.prototype.convertToCoarseningGraph = function (coseG, G)
     // then, e is an edge between two leaf nodes
     if ((e.getSource().getChild() == null) && (e.getTarget().getChild() == null))
     {
-      G.add(new CoarseningEdge(), map.get(e.getSource()), map.get(e.getTarget()));
+      G.add(new CoSEEdge(), map.get(e.getSource()), map.get(e.getTarget()));
     }
   }
 }
