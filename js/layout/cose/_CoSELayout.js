@@ -113,8 +113,8 @@
       var sourceNode = idToLNode[edge.data("source")];
       var targetNode = idToLNode[edge.data("target")];
       var e1 = gm.add(layout.newEdge(), sourceNode, targetNode);
-      
-      if(sourceNode.owner.getNodes().indexOf(this) > -1 && targetNode.owner.getNodes().indexOf(this) > -1)
+
+      if (sourceNode.owner.getNodes().indexOf(this) > -1 && targetNode.owner.getNodes().indexOf(this) > -1)
         var e1 = gm.add(layout.newEdge(), sourceNode, targetNode);
     }
 
@@ -122,10 +122,10 @@
 
     if (this.options.tile) {
       //fill the toBeTiled map
-      for(var i = 0; i < nodes.length; i++){
+      for (var i = 0; i < nodes.length; i++) {
         getToBeTiled(nodes[i]);
       }
-      
+
       // Repopulate members
       this.repopulateZeroDegreeMembers(tiledZeroDegreeNodes);
 
@@ -169,36 +169,36 @@
     return this; // chaining
   };
 
-  var getToBeTiled = function(node){
+  var getToBeTiled = function (node) {
     var id = node.data("id");
     //firstly check the previous results
-    if(toBeTiled[id] != null){
+    if (toBeTiled[id] != null) {
       return toBeTiled[id];
     }
-    
+
     //only compound nodes are to be tiled
     var children = node.children();
-    if(children == null || children.length == 0){
+    if (children == null || children.length == 0) {
       toBeTiled[id] = false;
       return false;
     }
-    
+
     //a compound node is not to be tiled if all of its compound children are not to be tiled
-    for(var i = 0; i < children.length; i++){
+    for (var i = 0; i < children.length; i++) {
       var theChild = children[i];
-      
-      if(theChild.degree(false) > 0){
+
+      if (theChild.degree(false) > 0) {
         toBeTiled[id] = false;
         return false;
       }
-      
+
       //pass the children not having the compound structure
-      if(theChild.children() == null || theChild.children().length == 0){
+      if (theChild.children() == null || theChild.children().length == 0) {
         toBeTiled[theChild.data("id")] = false;
         continue;
       }
-      
-      if(!getToBeTiled(theChild)){
+
+      if (!getToBeTiled(theChild)) {
         toBeTiled[id] = false;
         return false;
       }
@@ -573,34 +573,6 @@
    * the aspect ratio(1) or not.
    */
   _CoSELayout.prototype.canAddHorizontal = function (organization, extraWidth, extraHeight) {
-    /*var sri = this.getShortestRowIndex(organization);
-     
-     if (sri < 0) {
-     return true;
-     }
-     
-     var min = organization.rowWidth[sri];
-     
-     var hDiff = 0;
-     if(organization.rowHeight[sri] < extraHeight){
-     if(sri > 0)
-     hDiff = extraHeight + organization.verticalPadding - organization.rowHeight[sri];
-     }
-     if (organization.width - min >= extraWidth + organization.horizontalPadding)  {
-     return true;
-     }
-     
-     return organization.height + hDiff > min + extraWidth + organization.horizontalPadding;
-     
-     
-     
-     */
-
-
-
-
-
-
 
     var sri = this.getShortestRowIndex(organization);
 
@@ -637,25 +609,13 @@
       add_new_row_ratio = (organization.height + hDiff) / organization.width;
     }
 
-//    add_to_row_ratio = Math.abs(add_to_row_ratio - aspectRatio);
-//    add_new_row_ratio= Math.abs(add_new_row_ratio - aspectRatio);
-
     if (add_new_row_ratio < 1)
       add_new_row_ratio = 1 / add_new_row_ratio;
 
     if (add_to_row_ratio < 1)
       add_to_row_ratio = 1 / add_to_row_ratio;
 
-
-//    return add_to_row_ratio > add_new_row_ratio;
     return add_to_row_ratio < add_new_row_ratio;
-
-
-
-
-
-
-
   };
 
   /**
