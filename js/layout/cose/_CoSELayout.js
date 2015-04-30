@@ -219,10 +219,6 @@
 
     // Find all zero degree nodes which aren't covered by a complex
     var zeroDegree = this.cy.nodes().filter(function (i, ele) {
-//      if (this.degree(false) == 0 && this.parent().is("[sbgnclass!='complex']"))
-//      var a = this.parent().is("[sbgnclass!='complex']");
-//      if(ele.parent().length > 0)
-//        var b = getToBeTiled(ele.parent()[0]);
       if (this.degree(false) == 0 && ele.parent().length > 0 && !getToBeTiled(ele.parent()[0]))
         return true;
       else
@@ -252,13 +248,11 @@
           this.cy.add({
             group: "nodes",
             data: {id: dummyComplexId, parent: p_id,
-//              sbgnclass: 'complex', sbgnstatesandinfos: []
             },
             position: {x: Math.random() * this.cy.container().clientWidth,
               y: Math.random() * this.cy.container().clientHeight}
           });
         }
-//        toBeTiled[]
       }
     }
 
