@@ -5,6 +5,7 @@
 
   var allChildren = [];
   var idToLNode = {};
+  var toBeTiled = {};
 
   var defaults = {
     // Called on `layoutready`
@@ -59,6 +60,7 @@
     var options = this.options;
     allChildren = [];
     idToLNode = {};
+    toBeTiled = {};
     layout = new CoSELayout();
     //var options = this.options;
     var eles = this.options.eles; // elements to consider in the layout
@@ -111,11 +113,19 @@
       var sourceNode = idToLNode[edge.data("source")];
       var targetNode = idToLNode[edge.data("target")];
       var e1 = gm.add(layout.newEdge(), sourceNode, targetNode);
+      
+      if(sourceNode.owner.getNodes().indexOf(this) > -1 && targetNode.owner.getNodes().indexOf(this) > -1)
+        var e1 = gm.add(layout.newEdge(), sourceNode, targetNode);
     }
 
     layout.runLayout();
 
     if (this.options.tile) {
+      //fill the toBeTiled map
+      for(var i = 0; i < nodes.length; i++){
+        getToBeTiled(nodes[i]);
+      }
+      
       // Repopulate members
       this.repopulateZeroDegreeMembers(tiledZeroDegreeNodes);
 
@@ -159,6 +169,44 @@
     return this; // chaining
   };
 
+  var getToBeTiled = function(node){
+    var id = node.data("id");
+    //firstly check the previous results
+    if(toBeTiled[id] != null){
+      return toBeTiled[id];
+    }
+    
+    //only compound nodes are to be tiled
+    var children = node.children();
+    if(children == null || children.length == 0){
+      toBeTiled[id] = false;
+      return false;
+    }
+    
+    //a compound node is not to be tiled if all of its compound children are not to be tiled
+    for(var i = 0; i < children.length; i++){
+      var theChild = children[i];
+      
+      if(theChild.degree(false) > 0){
+        toBeTiled[id] = false;
+        return false;
+      }
+      
+      //pass the children not having the compound structure
+      if(theChild.children() == null || theChild.children().length == 0){
+        toBeTiled[theChild.data("id")] = false;
+        continue;
+      }
+      
+      if(!getToBeTiled(theChild)){
+        toBeTiled[id] = false;
+        return false;
+      }
+    }
+    toBeTiled[id] = true;
+    return true;
+  }
+
   /**
    * This method finds each zero degree node in the graph that are not owned by a complex. 
    * If the number of zero degree nodes at any level is less than 2, no need to tile. 
@@ -171,7 +219,11 @@
 
     // Find all zero degree nodes which aren't covered by a complex
     var zeroDegree = this.cy.nodes().filter(function (i, ele) {
-      if (this.degree(false) == 0 && this.parent().is("[sbgnclass!='complex']"))
+//      if (this.degree(false) == 0 && this.parent().is("[sbgnclass!='complex']"))
+//      var a = this.parent().is("[sbgnclass!='complex']");
+//      if(ele.parent().length > 0)
+//        var b = getToBeTiled(ele.parent()[0]);
+      if (this.degree(false) == 0 && ele.parent().length > 0 && !getToBeTiled(ele.parent()[0]))
         return true;
       else
         return false;
@@ -200,11 +252,13 @@
           this.cy.add({
             group: "nodes",
             data: {id: dummyComplexId, parent: p_id,
-              sbgnclass: 'complex', sbgnstatesandinfos: []},
+//              sbgnclass: 'complex', sbgnstatesandinfos: []
+            },
             position: {x: Math.random() * this.cy.container().clientWidth,
               y: Math.random() * this.cy.container().clientHeight}
           });
         }
+//        toBeTiled[]
       }
     }
 
@@ -227,7 +281,7 @@
 
     // Perform dfs to get the inner complex first
     this.cy.elements().dfs(roots, function (i, depth) {
-      if (this.is("[sbgnclass='complex']")) {
+      if (getToBeTiled(this)) {
         complexOrder.push(this);
       }
     }, options.directed);
