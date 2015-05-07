@@ -117,7 +117,7 @@
       if (sourceNode.owner.getNodes().indexOf(this) > -1 && targetNode.owner.getNodes().indexOf(this) > -1)
         var e1 = gm.add(layout.newEdge(), sourceNode, targetNode);
     }
-
+    
     layout.runLayout();
 
     if (this.options.tile) {
@@ -693,6 +693,8 @@
       }
       theNode.id = theChild.data("id");
       idToLNode[theChild.data("id")] = theNode;
+      if (isNaN(theNode.rect.x)) {theNode.rect.x = 0;}
+      if (isNaN(theNode.rect.y)) {theNode.rect.y = 0;}
       if (children_of_children != null && children_of_children.length > 0) {
         var theNewGraph;
         theNewGraph = layout.getGraphManager().add(layout.newGraph(), theNode);
