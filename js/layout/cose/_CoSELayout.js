@@ -678,7 +678,8 @@
     for (var i = 0; i < size; i++) {
       var theChild = children[i];
       this.cy.nodes().length;
-      var children_of_children = allChildren[theChild.data("id")];
+//      var children_of_children = allChildren[theChild.data("id")];
+      var children_of_children = theChild.children();
       var theNode;
 
       if (theChild._private.data.sbgnbbox.w !== null
