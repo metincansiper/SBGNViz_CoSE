@@ -1745,7 +1745,7 @@
 	}
 
 	$$.sbgn.drawDynamicLabelText = function(context, textProp){
-		var textHeight = parseInt(textProp.height/(2.5));
+		var textHeight = parseInt(textProp.height/(2.3));
 		textProp.color = "#0f0f0f";
 		textProp.font = textHeight + "px Arial";
 		$$.sbgn.drawText(context, textProp);
@@ -1758,7 +1758,7 @@
 		var stateLabel = (stateVariable == null /*|| typeof stateVariable === undefined */) ? stateValue : 
 			stateValue + "@" + stateVariable;
 		
-		var fontSize = parseInt(textProp.height/2);
+		var fontSize = parseInt(textProp.height/1.5);
 
 		textProp.font = fontSize + "px Arial";
 		textProp.label = stateLabel;
@@ -1767,7 +1767,7 @@
 	};
 
 	$$.sbgn.drawInfoText = function(context, textProp){
-		var fontSize = parseInt(textProp.height/2);
+		var fontSize = parseInt(textProp.height/1.5);
 		textProp.font = fontSize + "px Arial";
 		textProp.color = "#0f0f0f";
 		$$.sbgn.drawText(context, textProp);

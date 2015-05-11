@@ -23,7 +23,7 @@ var sbgnStyleSheet = cytoscape.stylesheet()
             'content' : 'data(sbgnlabel)',
             'text-valign' : 'bottom',
             'text-halign' : 'center',
-            'font-size' : '20',
+            'font-size' : '16',
             'padding-bottom' : '10',
             'padding-top' : '10',
             'padding-left' : '10',
