@@ -1745,7 +1745,7 @@
 	}
 
 	$$.sbgn.drawDynamicLabelText = function(context, textProp){
-		var textHeight = parseInt(textProp.height/(2.3));
+		var textHeight = parseInt(textProp.height/(2.45));
 		textProp.color = "#0f0f0f";
 		textProp.font = textHeight + "px Arial";
 		$$.sbgn.drawText(context, textProp);
