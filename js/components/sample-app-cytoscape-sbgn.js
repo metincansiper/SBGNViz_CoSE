@@ -10,11 +10,7 @@ var sbgnStyleSheet = cytoscape.stylesheet()
         })
         .selector("node[sbgnclass='complex']")
         .css({
-            'background-color' : '#F4F3EE',
-            'padding-bottom' : '15',
-            'padding-top' : '15',
-            'padding-left' : '15',
-            'padding-right' : '15'
+            'background-color' : '#F4F3EE'
         })
         .selector("node[sbgnclass='compartment']")
         .css({
@@ -23,11 +19,7 @@ var sbgnStyleSheet = cytoscape.stylesheet()
             'content' : 'data(sbgnlabel)',
             'text-valign' : 'bottom',
             'text-halign' : 'center',
-            'font-size' : '16',
-            'padding-bottom' : '10',
-            'padding-top' : '10',
-            'padding-left' : '10',
-            'padding-right' : '10'
+            'font-size' : '16'
         })
         .selector("node[sbgnclass!='complex'][sbgnclass!='compartment'][sbgnclass!='submap']")
         .css({
@@ -121,9 +113,9 @@ var NotyView = Backbone.View.extend({
     }
 });
 
-var SBGNContainer = Backbone.View.extend({
-    cyStyle: sbgnStyleSheet,
-
+var SBGNContainer = Backbone.View.extend({  
+  cyStyle: sbgnStyleSheet,
+    
     render: function(){
         (new NotyView({
             template: "#noty-info",
@@ -160,12 +152,36 @@ var SBGNContainer = Backbone.View.extend({
             ready: function()
             {
                 window.cy = this;
+                
+                var nodes = cy.nodes();
+                var total = 0;
+                var numOfSimples = 0;
+                
+                for(var i = 0; i < nodes.length; i++){
+                  var theNode = nodes[i];
+                  if(theNode.children() == null || theNode.children().length == 0){
+                    total += Number(theNode._private.data.sbgnbbox.w);
+                    total += Number(theNode._private.data.sbgnbbox.h);
+                    numOfSimples++;
+                  }
+                }
+                
+                var calc_padding = Math.floor(0.2 * total/(2*numOfSimples));
+                
+                if(calc_padding < 10){
+                  calc_padding = 10;
+                }
+                                
+                cy.$("node").css('padding-left', '' + calc_padding);                
+                cy.$("node").css('padding-right', '' + calc_padding);                
+                cy.$("node").css('padding-bottom', '' + calc_padding);                
+                cy.$("node").css('padding-top', '' + calc_padding);
 
                 var panProps = ({
                     fitPadding: 10,
                 });
                 container.cytoscapePanzoom(panProps);
-
+                
                 cy.on('mouseover', 'node', function(evt){
                   
                 });
